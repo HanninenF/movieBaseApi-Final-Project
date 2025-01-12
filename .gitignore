@@ -1,3 +1,6 @@
+# Exclude API keys
+apiKey.ts
+
 # Logs
 logs
 *.log
