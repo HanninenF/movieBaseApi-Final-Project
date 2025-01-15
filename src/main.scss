@@ -1,0 +1,28 @@
+@use "./components/index.scss";
+
+html {
+  background-color: darkolivegreen;
+}
+
+.searchBarContainer {
+  height: 60px;
+  background-color: black;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  #searchBar {
+    display: inline-flex;
+    align-items: flex-end;
+
+    .dropdownContainer {
+      align-items: flex-end;
+      /* SearchBar/Dropdown.scss */
+    }
+    /* .inputContainer {
+      /*  SearchBar/TextInput.scss
+    } 
+
+    /* searchBar/SearchButton */
+  }
+}

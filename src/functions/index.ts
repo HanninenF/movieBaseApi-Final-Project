@@ -1,3 +1,3 @@
-export * from "./getCharacterInfoByName";
-export * from "./renderCharacterInfo";
+export * from "./getMovieInfoByName";
+export * from "./renderMovieInfo";
 export * from "./setCharacter";
