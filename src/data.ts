@@ -1,6 +1,6 @@
-export const dropDownOptionsType = [
+export const dropDownOptionsData = [
   "All",
   "Titles",
-  "Tv Episodes",
-  "Celebs",
+  "Movies",
+  "Series",
 ] as const;

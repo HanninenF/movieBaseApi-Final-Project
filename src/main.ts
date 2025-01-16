@@ -1,5 +1,6 @@
 import "./main.scss";
 import * as Functions from "./functions/index";
+import * as Utils from "./utils/index";
 
 import { apiKey } from "./keys/apiKey";
 import * as Components from "./components/index";
@@ -33,12 +34,7 @@ inputContainer.classList.add("inputContainer");
 searchBar.appendChild(inputContainer);
 
 /* <!-- Dropdown för kategorier --> */
-export const dropDownOptions: string[] = [
-  "All",
-  "Titles",
-  "Tv Episodes",
-  "Celebs",
-];
+export const dropDownOptions: string[] = ["All", "Titles", "Movies", "Series"];
 
 dropdownContainer.appendChild(Components.createDropdown(dropDownOptions));
 
@@ -57,23 +53,39 @@ searchBar.appendChild(Components.createSearchButton());
 ///////////////////////////////////
 ////////////EventListeners/////////
 //////////////////////////////////
+AllDomEl.initDomElements();
 /* <!-- EventListener Sökfält Form--> */
-searchBar.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const dropdownValue = AllDomEl.dropdown.value as AllTypes.Category;
-  let searchInputValue: string = AllDomEl.searchInput.value;
+console.log("entered document.addEventListener");
+if (searchBar && AllDomEl.dropdown && AllDomEl.searchInput) {
+  searchBar.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    console.log("entered searchBar.addEventListener");
+    const dropdownValue = AllDomEl.dropdown!.value as AllTypes.Category;
+    console.log("categoryDropdown=", dropdownValue);
+    const searchInputValue = Utils.getUrlParametersFromWord(
+      AllDomEl.searchInput.value
+    ) as string;
 
-  if (dropdownValue === "All") {
-    const movieInfo = Functions.getMovieInfoByName(searchInputValue);
-  }
-  if (dropdownValue === "Titles") {
-    const movieInfo = Functions.getMovieInfoByTitle(searchInputValue);
-  }
-  if (dropdownValue === "Tv Episodes") {
-    const TvEpisodeInfo = Functions.getTvEpisodeInfoByName(searchInputValue);
-  }
-  if (dropdownValue === "Celebs") {
-    const celebInfo = Functions.getCelebInfoByName(searchInputValue);
-  }
-  searchInputValue = "";
-});
+    console.log("searchInputValue= ", searchInputValue);
+
+    if (dropdownValue === "All") {
+      const movieInfo = await Functions.getMovieInfoByName(searchInputValue);
+      console.log(movieInfo);
+    }
+    if (dropdownValue === "Titles") {
+      const movieInfo = await Functions.getMovieInfoByTitle(searchInputValue);
+      console.log(movieInfo);
+    }
+    if (dropdownValue === "Movies") {
+      const movieInfo =
+        await Functions.getMovieInfoByNameAndTypeMovie(searchInputValue);
+      console.log(movieInfo);
+    }
+    if (dropdownValue === "Series") {
+      const seriesInfo = await Functions.getSeriesInfoByName(searchInputValue);
+      console.log(seriesInfo);
+    }
+    AllDomEl.searchInput.value = "";
+    /*  AllDomEl.dropdown.value = "default"; */
+  });
+}
