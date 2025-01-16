@@ -1,5 +1,5 @@
 import { baseUrl } from "../main";
-import { AllTypes } from "../types";
+import { AllTypes } from "../types/types";
 
 export const getMovieInfoByName = async (
   title: string

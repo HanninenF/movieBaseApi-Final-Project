@@ -5,7 +5,7 @@ import * as Utils from "./utils/index";
 import { apiKey } from "./keys/apiKey";
 import * as Components from "./components/index";
 import { AllDomEl } from "./utils/AllDomEl";
-import { AllTypes } from "./types";
+import { AllTypes } from "./types/types";
 
 export const baseUrl: string = `http://www.omdbapi.com/?apikey=${apiKey}&`;
 
