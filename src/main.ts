@@ -11,27 +11,29 @@ export const baseUrl: string = `http://www.omdbapi.com/?apikey=${apiKey}&`;
 
 console.log(await Functions.getMovieInfoByName("lethal"));
 
-export const viewportSection = document.querySelector(
-  ".viewportSection"
-) as HTMLElement;
+export const main = document.querySelector(".main") as HTMLElement;
 
-export const searchBarContainer = document.querySelector(
+/* .SearchBarContainer --> */
+main.appendChild(Components.searchBarContainer());
+const searchBarContainer = document.querySelector(
   ".searchBarContainer"
 ) as HTMLDivElement;
 
-export const searchBar = document.querySelector(
-  "#searchBar"
-) as HTMLFormElement;
+/* .SearchBar (formElement)--> */
+searchBarContainer.appendChild(Components.createSearchBar());
+const searchBar = document.querySelector("#searchBar") as HTMLElement;
 
 /* <!-- DropdownContainer i Sökfält (form) --> */
-const dropdownContainer = document.createElement("div");
-dropdownContainer.classList.add("dropdownContainer");
-searchBar.appendChild(dropdownContainer);
+searchBar.appendChild(Components.createDropdownContainer());
+const dropdownContainer = document.querySelector(
+  ".dropdownContainer"
+) as HTMLDivElement;
 
 /* <!-- InputContainer i sökfält (form) --> */
-const inputContainer = document.createElement("div");
-inputContainer.classList.add("inputContainer");
-searchBar.appendChild(inputContainer);
+searchBar.appendChild(Components.createInputContainer());
+const inputContainer = document.querySelector(
+  ".inputContainer"
+) as HTMLInputElement;
 
 /* <!-- Dropdown för kategorier --> */
 export const dropDownOptions: string[] = ["All", "Titles", "Movies", "Series"];
@@ -42,6 +44,7 @@ dropdownContainer.appendChild(Components.createDropdown(dropDownOptions));
 inputContainer.appendChild(Components.createTextInput());
 
 /* <!-- Autosuggestions i InputContainer --> */
+//TODO: fixa denna också
 const autosuggestions = document.createElement("div");
 autosuggestions.classList.add("autosuggestions");
 autosuggestions.role = "listbox";

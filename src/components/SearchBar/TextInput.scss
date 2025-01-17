@@ -3,7 +3,7 @@
 
 .searchInput {
   @include mixin.searchBar(
-    $width: 50vw,
+    $width: 45vw,
     $height: globalVar.$searchBarHeight,
     $padding-left: 0.5vw
   );
