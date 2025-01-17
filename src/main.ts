@@ -70,11 +70,11 @@ if (searchBar && AllDomEl.dropdown && AllDomEl.searchInput) {
 
     if (dropdownValue === "All") {
       const movieInfo = await Functions.getMovieInfoByName(searchInputValue);
-      console.log(movieInfo);
+      console.log(JSON.stringify(movieInfo, null, 2));
     }
     if (dropdownValue === "Titles") {
       const movieInfo = await Functions.getMovieInfoByTitle(searchInputValue);
-      console.log(movieInfo);
+      console.log(JSON.stringify(movieInfo, null, 2));
     }
     if (dropdownValue === "Movies") {
       const movieInfo =
@@ -87,5 +87,7 @@ if (searchBar && AllDomEl.dropdown && AllDomEl.searchInput) {
     }
     AllDomEl.searchInput.value = "";
     /*  AllDomEl.dropdown.value = "default"; */
+
+    Functions.renderMiniCard();
   });
 }

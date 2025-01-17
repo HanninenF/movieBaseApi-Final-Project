@@ -1,5 +1,15 @@
+@use "../utils/mixin.scss" as mixin;
+@use "../utils/variables.scss" as globalVar;
+
 .searchInput {
-  min-width: 50px;
-  height: 24px;
-  font-size: 1rem;
+  @include mixin.searchBar(
+    $width: 50vw,
+    $height: globalVar.$searchBarHeight,
+    $padding-left: 0.5vw
+  );
+  box-sizing: border-box;
+}
+
+.searchInput:focus {
+  outline: none;
 }

@@ -8,6 +8,7 @@ export const createDropdown = (options: string[]): HTMLSelectElement => {
     const optionElement = document.createElement("option");
     optionElement.value = option;
     optionElement.textContent = option;
+    optionElement.classList.add("category-dropdown");
     dropdown.appendChild(optionElement);
   });
   return dropdown;

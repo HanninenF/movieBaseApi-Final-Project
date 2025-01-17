@@ -1,5 +1,14 @@
+@use "../utils/mixin.scss" as mixin;
+@use "../utils/variables.scss" as globalVar;
+
 .buttonSearch {
-  min-width: 50px;
-  height: 30px;
-  font-size: 1rem;
+  @include mixin.searchBar(
+    $height: globalVar.$searchBarHeight,
+    $width: auto,
+    $padding-left: 0
+  );
+
+  cursor: pointer;
+  border-top-right-radius: globalVar.$searchBarInnerRadius;
+  border-bottom-right-radius: globalVar.$searchBarInnerRadius;
 }

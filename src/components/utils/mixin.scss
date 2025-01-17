@@ -1,0 +1,9 @@
+@mixin searchBar($width, $height, $padding-left) {
+  width: $width;
+  height: $height;
+  font-size: 1rem;
+  border: none;
+  background-color: buttonface;
+  padding-left: $padding-left;
+  min-width: 50px;
+}

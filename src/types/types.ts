@@ -1,4 +1,4 @@
-import { dropDownOptionsData } from "../data";
+import { dropDownOptionsData } from "../data/data";
 export namespace AllTypes {
   export type Root = {
     Title: string;
