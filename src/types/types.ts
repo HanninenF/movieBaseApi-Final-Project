@@ -1,6 +1,19 @@
 import { dropDownOptionsData } from "../data/data";
 export namespace AllTypes {
   export type Root = {
+    Search: Search[];
+    totalResults: string;
+    Response: string;
+  };
+
+  export type Search = {
+    Title: string;
+    Year: string;
+    imdbID: string;
+    Type: string;
+    Poster: string;
+  };
+  export type Movie = {
     Title: string;
     Year: string;
     Rated: string;

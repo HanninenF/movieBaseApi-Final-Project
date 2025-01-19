@@ -1,4 +1,4 @@
-@use "./components/index.scss";
+@use "./components/SearchBar/index/index.scss";
 
 * {
   margin: 0;
@@ -9,28 +9,24 @@
 html {
   background-color: darkolivegreen;
 }
-
-.searchBarContainer {
-  height: 60px;
-  background-color: black;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  #searchBar {
-    border: 3px solid #497549;
+.miniCard {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: white;
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+  img {
+    width: 100%; /* Bilden anpassar sig till kortet */
+    max-width: 150px;
+    height: auto;
     border-radius: 5px;
-    display: inline-flex;
-    align-items: flex-end;
-
-    .dropdownContainer {
-      align-items: flex-end;
-      /* SearchBar/Dropdown.scss */
-    }
-    /* .inputContainer {
-      /*  SearchBar/TextInput.scss
-    } 
-
-    /* searchBar/SearchButton */
+  }
+  h2 {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    text-align: center;
   }
 }

@@ -1,5 +1,5 @@
-@use "../utils/mixin.scss" as mixin;
-@use "../utils/variables.scss" as globalVar;
+@use "./styleHelpers/mixin.scss" as mixin;
+@use "../../variables.scss" as globalVar;
 
 #categoryDropdown {
   @include mixin.searchBar(
@@ -7,7 +7,7 @@
     $height: globalVar.$searchBarHeight,
     $padding-left: 0
   );
-  border-right: 2px solid #757575;
+  border-right: globalVar.$small solid #757575;
   padding: 0.3rem;
   font-weight: bold;
   display: flex;
@@ -23,10 +23,6 @@
     color: hsl(0, 0%, 85%);
     font-size: 1.3rem;
   }
-}
-
-#categoryDropdown option:hover {
-  background-color: black;
 }
 
 #categoryDropdown:focus {

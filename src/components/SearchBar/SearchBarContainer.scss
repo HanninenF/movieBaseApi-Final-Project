@@ -1,0 +1,8 @@
+@use "./styleHelpers/mixin.scss" as mixin;
+@use "../../variables.scss" as globalVar;
+
+.searchBarContainer {
+  height: globalVar.$searchBarHeight * 2;
+  background-color: black;
+  @include mixin.flexCenter;
+}

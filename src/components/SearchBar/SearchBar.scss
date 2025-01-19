@@ -1,0 +1,9 @@
+@use "./styleHelpers/mixin.scss" as mixin;
+@use "../../variables.scss" as globalVar;
+
+#searchBar {
+  border: globalVar.$small + 1 solid #497549;
+  border-radius: globalVar.$small + 3;
+  display: inline-flex;
+  align-items: flex-end;
+}

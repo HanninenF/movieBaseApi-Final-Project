@@ -3,7 +3,8 @@ import * as Functions from "./functions/index";
 import * as Utils from "./utils/index";
 
 import { apiKey } from "./keys/apiKey";
-import * as Components from "./components/index";
+import * as Searchbar from "./components/SearchBar/index";
+import * as Minicard from "./components/MiniCard/createMiniCardContainer";
 import { AllDomEl } from "./utils/AllDomEl";
 import { AllTypes } from "./types/types";
 
@@ -13,24 +14,24 @@ console.log(await Functions.getMovieInfoByName("lethal"));
 
 export const main = document.querySelector(".main") as HTMLElement;
 
-/* .SearchBarContainer --> */
-main.appendChild(Components.searchBarContainer());
+/* SearchBarContainer --> */
+main.appendChild(Searchbar.searchBarContainer());
 const searchBarContainer = document.querySelector(
   ".searchBarContainer"
 ) as HTMLDivElement;
 
-/* .SearchBar (formElement)--> */
-searchBarContainer.appendChild(Components.createSearchBar());
+/* SearchBar (formElement)--> */
+searchBarContainer.appendChild(Searchbar.createSearchBar());
 const searchBar = document.querySelector("#searchBar") as HTMLElement;
 
 /* <!-- DropdownContainer i Sökfält (form) --> */
-searchBar.appendChild(Components.createDropdownContainer());
+searchBar.appendChild(Searchbar.createDropdownContainer());
 const dropdownContainer = document.querySelector(
   ".dropdownContainer"
 ) as HTMLDivElement;
 
 /* <!-- InputContainer i sökfält (form) --> */
-searchBar.appendChild(Components.createInputContainer());
+searchBar.appendChild(Searchbar.createInputContainer());
 const inputContainer = document.querySelector(
   ".inputContainer"
 ) as HTMLInputElement;
@@ -38,10 +39,10 @@ const inputContainer = document.querySelector(
 /* <!-- Dropdown för kategorier --> */
 export const dropDownOptions: string[] = ["All", "Titles", "Movies", "Series"];
 
-dropdownContainer.appendChild(Components.createDropdown(dropDownOptions));
+dropdownContainer.appendChild(Searchbar.createDropdown(dropDownOptions));
 
 /* <!-- Textfält --> */
-inputContainer.appendChild(Components.createTextInput());
+inputContainer.appendChild(Searchbar.createTextInput());
 
 /* <!-- Autosuggestions i InputContainer --> */
 //TODO: fixa denna också
@@ -51,7 +52,10 @@ autosuggestions.role = "listbox";
 inputContainer.appendChild(autosuggestions);
 
 /* <!-- Sökknapp --> */
-searchBar.appendChild(Components.createSearchButton());
+searchBar.appendChild(Searchbar.createSearchButton());
+
+/* <!-- miniCardsContainer --> */
+main.appendChild(Minicard.createMiniCardContainer());
 
 ///////////////////////////////////
 ////////////EventListeners/////////
@@ -74,10 +78,14 @@ if (searchBar && AllDomEl.dropdown && AllDomEl.searchInput) {
     if (dropdownValue === "All") {
       const movieInfo = await Functions.getMovieInfoByName(searchInputValue);
       console.log(JSON.stringify(movieInfo, null, 2));
+
+      //TODO: lägg in state
+      Functions.renderMiniCard(movieInfo);
+      console.log("rendern gick bra");
     }
     if (dropdownValue === "Titles") {
       const movieInfo = await Functions.getMovieInfoByTitle(searchInputValue);
-      console.log(JSON.stringify(movieInfo, null, 2));
+      console.log();
     }
     if (dropdownValue === "Movies") {
       const movieInfo =
@@ -91,6 +99,6 @@ if (searchBar && AllDomEl.dropdown && AllDomEl.searchInput) {
     AllDomEl.searchInput.value = "";
     /*  AllDomEl.dropdown.value = "default"; */
 
-    Functions.renderMiniCard();
+    /* Functions.renderMiniCard(); */
   });
 }

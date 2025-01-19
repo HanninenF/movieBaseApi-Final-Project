@@ -1,5 +1,5 @@
-@use "../utils/mixin.scss" as mixin;
-@use "../utils/variables.scss" as globalVar;
+@use "./styleHelpers/mixin.scss" as mixin;
+@use "../../variables.scss" as globalVar;
 
 .buttonSearch {
   @include mixin.searchBar(

@@ -1,0 +1,6 @@
+@use "./styleHelpers/mixin.scss" as mixin;
+@use "../../variables.scss" as globalVar;
+
+.dropdownContainer {
+  align-items: flex-end;
+}

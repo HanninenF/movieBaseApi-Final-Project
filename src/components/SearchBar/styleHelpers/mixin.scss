@@ -7,3 +7,9 @@
   padding-left: $padding-left;
   min-width: 50px;
 }
+
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
