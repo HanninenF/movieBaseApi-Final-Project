@@ -58,4 +58,12 @@ export const renderMiniCard = (currentView: AllTypes.Search[]) => {
       movieUl.appendChild(liElMovieInfo);
     }
   });
+
+  miniCardContainer.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    const button = target.closest("button.miniCard");
+
+    const movieId = button?.getAttribute("data-id");
+    console.log("knapp klickad, data-id= ", movieId);
+  });
 };

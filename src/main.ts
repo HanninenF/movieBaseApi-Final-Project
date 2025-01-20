@@ -87,21 +87,23 @@ if (searchBar && AllDomEl.dropdown && AllDomEl.searchInput) {
 
       console.log(movieInfo);
 
-      //TODO: lägg in state
       Functions.renderMiniCard(State.appState.currentView);
 
       console.log("rendern gick bra");
     }
     if (dropdownValue === "Titles") {
+      //TODO:
       const movieInfo = await Functions.getMovieInfoByTitle(searchInputValue);
       console.log(movieInfo);
     }
     if (dropdownValue === "Movies") {
+      //TODO_
       const movieInfo =
         await Functions.getMovieInfoByNameAndTypeMovie(searchInputValue);
       console.log(movieInfo);
     }
     if (dropdownValue === "Series") {
+      //TODO:
       const seriesInfo = await Functions.getSeriesInfoByName(searchInputValue);
       console.log(seriesInfo);
     }
