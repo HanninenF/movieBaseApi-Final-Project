@@ -9,24 +9,63 @@
 html {
   background-color: darkolivegreen;
 }
-.miniCard {
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 10px;
-  background-color: white;
-  cursor: pointer;
-  transition:
-    transform 0.2s,
-    box-shadow 0.2s;
-  img {
-    width: 100%; /* Bilden anpassar sig till kortet */
-    max-width: 150px;
-    height: auto;
+.miniCardContainer {
+  margin: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+
+  .miniCard {
+    display: flex;
+    /* height: 1px; */
+    border: 1px solid #ddd;
     border-radius: 5px;
+    padding: 10px;
+    background-color: white;
+    cursor: pointer;
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s;
+    img {
+      width: 100%; /* Bilden anpassar sig till kortet */
+      /* width: 2px; */
+      max-width: 80px;
+      /* min-width: 50px */
+      height: auto;
+      border-radius: 5px;
+    }
+    .movieInfoDiv {
+      display: flex;
+      padding-left: 10px;
+      align-items: flex-start;
+      flex-direction: column;
+      align-self: end;
+
+      h3 {
+        font-size: 1rem;
+        text-align: center;
+      }
+
+      .movieInfoUl {
+        list-style-type: none;
+        .year {
+          color: hsl(441 11% 42%);
+          font-weight: bold;
+        }
+        .type {
+          font-style: italic;
+        }
+      }
+    }
   }
-  h2 {
-    margin-top: 10px;
-    font-size: 1.2rem;
-    text-align: center;
+}
+
+.miniCard:hover {
+  background-color: hsl(123 54% 85% / 1);
+}
+
+@media (max-width: 522px) {
+  .miniCardContainer {
+    grid-template-columns: repeat(1, 1fr);
   }
 }

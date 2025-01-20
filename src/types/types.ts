@@ -46,5 +46,10 @@ export namespace AllTypes {
     Value: string;
   };
 
+  export type MovieInfoUl = {
+    year: string;
+    type: string;
+  };
+
   export type Category = (typeof dropDownOptionsData)[number];
 }

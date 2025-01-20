@@ -1,6 +1,7 @@
 import "./main.scss";
 import * as Functions from "./functions/index";
 import * as Utils from "./utils/index";
+import * as State from "./state/index";
 
 import { apiKey } from "./keys/apiKey";
 import * as Searchbar from "./components/SearchBar/index";
@@ -77,15 +78,23 @@ if (searchBar && AllDomEl.dropdown && AllDomEl.searchInput) {
 
     if (dropdownValue === "All") {
       const movieInfo = await Functions.getMovieInfoByName(searchInputValue);
-      console.log(JSON.stringify(movieInfo, null, 2));
+
+      State.setAllMovies(movieInfo.Search);
+
+      console.log("state movies from main= ", State.appState.allMovies);
+
+      State.setCurrentView(movieInfo.Search);
+
+      console.log(movieInfo);
 
       //TODO: lägg in state
-      Functions.renderMiniCard(movieInfo);
+      Functions.renderMiniCard(State.appState.currentView);
+
       console.log("rendern gick bra");
     }
     if (dropdownValue === "Titles") {
       const movieInfo = await Functions.getMovieInfoByTitle(searchInputValue);
-      console.log();
+      console.log(movieInfo);
     }
     if (dropdownValue === "Movies") {
       const movieInfo =
@@ -102,3 +111,16 @@ if (searchBar && AllDomEl.dropdown && AllDomEl.searchInput) {
     /* Functions.renderMiniCard(); */
   });
 }
+const searchButton = document.createElement("button");
+searchButton.classList.add("buttonSearch2");
+searchButton.type = "button";
+searchButton.textContent = "do not press!";
+main.append(searchButton);
+
+console.log("searchButton= ", searchButton);
+searchButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  State.appState.currentView.pop();
+  console.log("currentView at the end of main= ", State.appState.currentView);
+  Functions.renderMiniCard(State.appState.currentView);
+});

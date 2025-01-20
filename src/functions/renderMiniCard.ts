@@ -1,6 +1,7 @@
+import { appState } from "../state";
 import { AllTypes } from "../types/types";
 
-export const renderMiniCard = (movieInfo: AllTypes.Root) => {
+export const renderMiniCard = (currentView: AllTypes.Search[]) => {
   const miniCardContainer = document.querySelector(
     ".miniCardContainer"
   ) as HTMLElement;
@@ -13,7 +14,7 @@ export const renderMiniCard = (movieInfo: AllTypes.Root) => {
 
   miniCardContainer.innerHTML = "";
 
-  movieInfo.Search.forEach((movie) => {
+  currentView.forEach((movie) => {
     console.log(movie.Title);
 
     const miniCard = document.createElement("button");
@@ -35,11 +36,26 @@ export const renderMiniCard = (movieInfo: AllTypes.Root) => {
     title.classList.add("miniTitle");
     title.textContent = movie.Title;
 
-    miniCard.append(poster, title);
+    miniCard.appendChild(poster);
 
-    const movieInfoUl = {
+    const movieInfoUl: AllTypes.MovieInfoUl = {
       year: movie.Year,
       type: movie.Type,
     };
+
+    const movieInfoDiv = document.createElement("div");
+    movieInfoDiv.classList.add("movieInfoDiv");
+    miniCard.appendChild(movieInfoDiv);
+
+    const movieUl = document.createElement("ul");
+    movieUl.classList.add("movieInfoUl");
+    movieInfoDiv.append(title, movieUl);
+
+    for (const key in movieInfoUl) {
+      const liElMovieInfo = document.createElement("li");
+      liElMovieInfo.classList.add("liEl", key);
+      liElMovieInfo.textContent = movieInfoUl[key as keyof typeof movieInfoUl];
+      movieUl.appendChild(liElMovieInfo);
+    }
   });
 };
