@@ -59,11 +59,25 @@ export const renderMiniCard = (currentView: AllTypes.Search[]) => {
     }
   });
 
+  ///////////////////////////////////
+  ////////////EventListener/////////
+  //////////////////////////////////
   miniCardContainer.addEventListener("click", (e) => {
     const target = e.target as HTMLElement;
     const button = target.closest("button.miniCard");
 
     const movieId = button?.getAttribute("data-id");
     console.log("knapp klickad, data-id= ", movieId);
+    //TODO: fetcha ny data
+    //TODO: currentView
+
+    appState.currentView = appState.allMovies.filter((movie) =>
+      movie.imdbID === movieId ? movie : null
+    );
+
+    console.log(
+      "appstate.currentView in miniCardContainer.eventlistener= ",
+      appState.currentView
+    );
   });
 };
