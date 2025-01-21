@@ -5,7 +5,7 @@ import * as State from "./state/index";
 
 import { apiKey } from "./keys/apiKey";
 import * as Searchbar from "./components/SearchBar/index";
-import * as Minicard from "./components/MiniCard/createMiniCardContainer";
+import * as View from "./components/View/index";
 import * as BackArrow from "./components/BackArrow/index";
 import { AllDomEl } from "./utils/AllDomEl";
 import { AllTypes } from "./types/types";
@@ -56,8 +56,8 @@ inputContainer.appendChild(autosuggestions);
 /* <!-- Sökknapp --> */
 searchBar.appendChild(Searchbar.createSearchButton());
 
-/* <!-- miniCardsContainer --> */
-main.appendChild(Minicard.createMiniCardContainer());
+/* <!-- viewContainer --> */
+main.appendChild(View.createViewContainer());
 
 ///////////////////////////////////
 ////////////EventListeners/////////
@@ -67,6 +67,7 @@ AllDomEl.initDomElements();
 console.log("entered document.addEventListener");
 if (searchBar && AllDomEl.dropdown && AllDomEl.searchInput) {
   searchBar.addEventListener("submit", async (e) => {
+    State.appState.currentView = [];
     e.preventDefault();
     console.log("entered searchBar.addEventListener");
     const dropdownValue = AllDomEl.dropdown!.value as AllTypes.Category;
@@ -117,7 +118,7 @@ if (searchBar && AllDomEl.dropdown && AllDomEl.searchInput) {
   ///////////////////////////////////
   ////////////EventListener/////////
   //////////////////////////////////
-  AllDomEl.miniCardContainer.addEventListener("click", (e) => {
+  AllDomEl.viewContainer.addEventListener("click", (e) => {
     const target = e.target as HTMLElement;
     const miniCard = target.closest("button.miniCard") as HTMLButtonElement;
 
@@ -134,18 +135,9 @@ if (searchBar && AllDomEl.dropdown && AllDomEl.searchInput) {
     );
 
     console.log(
-      "State.appstate.currentView in miniCardContainer.eventlistener= ",
+      "State.appstate.currentView in viewContainer.eventlistener= ",
       State.appState.currentView
     );
-
-    main.appendChild(BackArrow.createBackArrowContainer());
-    const backArrowContainer = document.querySelector(
-      ".backArrowContainer"
-    ) as HTMLDivElement;
-    backArrowContainer.appendChild(BackArrow.createBackArrow());
-    const backArrow = document.querySelector(".backArrow") as HTMLDivElement;
-    console.log("backArrow= ", backArrow);
-    backArrowContainer.appendChild(backArrow);
 
     Functions.renderBigCard(State.appState.currentView);
   });

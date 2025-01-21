@@ -2,13 +2,14 @@ import { AllTypes } from "../types/types";
 import { AllDomEl } from "../utils/AllDomEl";
 
 export const renderMiniCard = (currentView: AllTypes.Search[]) => {
-  console.log("AllDomEl.miniCardContainer= ", AllDomEl.miniCardContainer);
-  if (!AllDomEl.miniCardContainer) {
-    console.error("AllDomEl.miniCardContainer element not found in DOM");
+  console.log("AllDomEl.viewContainer= ", AllDomEl.viewContainer);
+  if (!AllDomEl.viewContainer) {
+    console.error("AllDomEl.viewContainer element not found in DOM");
     return;
   }
 
-  AllDomEl.miniCardContainer.innerHTML = "";
+  AllDomEl.viewContainer.innerHTML = "";
+  console.log("clean viewContainer");
 
   currentView.forEach((movie) => {
     console.log(movie.Title);
@@ -20,7 +21,7 @@ export const renderMiniCard = (currentView: AllTypes.Search[]) => {
     miniCard.type = "button";
     console.log("miniCard= ", miniCard);
 
-    AllDomEl.miniCardContainer.appendChild(miniCard);
+    AllDomEl.viewContainer.appendChild(miniCard);
 
     const poster = document.createElement("img");
     poster.classList.add("miniPoster");

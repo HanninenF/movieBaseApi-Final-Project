@@ -8,5 +8,5 @@ export const getSeriesInfoByName = async (name: string) => {
 
   console.log("seriesUrl= ", seriesUrl);
 
-  return data;
+  return data.Response;
 };

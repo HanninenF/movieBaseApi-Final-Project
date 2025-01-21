@@ -9,19 +9,33 @@
 html {
   background-color: darkolivegreen;
 }
-.miniCardContainer {
-  margin: 2rem;
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.viewContainer {
+  align-self: center;
+  background-color: floralwhite;
+  /* margin: 2rem 0 0 9rem; */
   display: grid;
+  width: 620px;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  /* gap: 1rem; */
 
   .miniCard {
+    appearance: none;
+    max-width: 311px;
     display: flex;
     /* height: 1px; */
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    /* border: 1px solid #ddd; */
+    border: none;
+    border-bottom: 2px solid black;
+    /* border-radius: 5px; */
+    border-radius: 0;
     padding: 10px;
-    background-color: white;
+    /* background-color: white; */
+    background-color: inherit;
     cursor: pointer;
     transition:
       transform 0.2s,
@@ -65,7 +79,8 @@ html {
 }
 
 @media (max-width: 522px) {
-  .miniCardContainer {
+  .viewContainer {
+    width: 310px;
     grid-template-columns: repeat(1, 1fr);
   }
 }
