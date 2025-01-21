@@ -78,6 +78,14 @@ html {
   background-color: hsl(123 54% 85% / 1);
 }
 
+.backArrowContainer {
+  padding: 2rem 0 0 2rem;
+  align-self: flex-start;
+  .backArrow {
+    fill: black;
+  }
+}
+
 @media (max-width: 522px) {
   .viewContainer {
     width: 310px;

@@ -56,6 +56,19 @@ inputContainer.appendChild(autosuggestions);
 /* <!-- Sökknapp --> */
 searchBar.appendChild(Searchbar.createSearchButton());
 
+/* <!-- backArrow --> */
+//TODO: göm backArrow här
+
+main.appendChild(BackArrow.createBackArrowContainer());
+const backArrowContainer = document.querySelector(
+  ".backArrowContainer"
+) as HTMLDivElement;
+backArrowContainer.appendChild(BackArrow.createBackArrow());
+
+const backArrow = document.querySelector(".backArrow") as HTMLDivElement;
+console.log("backArrow= ", backArrow);
+backArrowContainer.appendChild(backArrow);
+
 /* <!-- viewContainer --> */
 main.appendChild(View.createViewContainer());
 
@@ -119,6 +132,10 @@ if (searchBar && AllDomEl.dropdown && AllDomEl.searchInput) {
   ////////////EventListener/////////
   //////////////////////////////////
   AllDomEl.viewContainer.addEventListener("click", async (e) => {
+    const viewContainer = document.querySelector(
+      ".viewContainer"
+    ) as HTMLDivElement;
+
     const target = e.target as HTMLElement;
     const miniCard = target.closest("button.miniCard") as HTMLButtonElement;
 
@@ -147,6 +164,8 @@ if (searchBar && AllDomEl.dropdown && AllDomEl.searchInput) {
       State.setCurrentViewById(detailedInfo);
 
       Functions.renderBigCard(State.appState.currentView);
+
+      viewContainer.textContent = "hello";
     }
   });
 }
