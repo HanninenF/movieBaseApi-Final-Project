@@ -1,18 +1,14 @@
-import { appState } from "../state";
 import { AllTypes } from "../types/types";
+import { AllDomEl } from "../utils/AllDomEl";
 
 export const renderMiniCard = (currentView: AllTypes.Search[]) => {
-  const miniCardContainer = document.querySelector(
-    ".miniCardContainer"
-  ) as HTMLElement;
-
-  console.log("miniCardContainer= ", miniCardContainer);
-  if (!miniCardContainer) {
-    console.error("miniCardContainer element not found in DOM");
+  console.log("AllDomEl.miniCardContainer= ", AllDomEl.miniCardContainer);
+  if (!AllDomEl.miniCardContainer) {
+    console.error("AllDomEl.miniCardContainer element not found in DOM");
     return;
   }
 
-  miniCardContainer.innerHTML = "";
+  AllDomEl.miniCardContainer.innerHTML = "";
 
   currentView.forEach((movie) => {
     console.log(movie.Title);
@@ -24,7 +20,7 @@ export const renderMiniCard = (currentView: AllTypes.Search[]) => {
     miniCard.type = "button";
     console.log("miniCard= ", miniCard);
 
-    miniCardContainer.appendChild(miniCard);
+    AllDomEl.miniCardContainer.appendChild(miniCard);
 
     const poster = document.createElement("img");
     poster.classList.add("miniPoster");
@@ -57,27 +53,5 @@ export const renderMiniCard = (currentView: AllTypes.Search[]) => {
       liElMovieInfo.textContent = movieInfoUl[key as keyof typeof movieInfoUl];
       movieUl.appendChild(liElMovieInfo);
     }
-  });
-
-  ///////////////////////////////////
-  ////////////EventListener/////////
-  //////////////////////////////////
-  miniCardContainer.addEventListener("click", (e) => {
-    const target = e.target as HTMLElement;
-    const button = target.closest("button.miniCard");
-
-    const movieId = button?.getAttribute("data-id");
-    console.log("knapp klickad, data-id= ", movieId);
-    //TODO: fetcha ny data
-    //TODO: currentView
-
-    appState.currentView = appState.allMovies.filter((movie) =>
-      movie.imdbID === movieId ? movie : null
-    );
-
-    console.log(
-      "appstate.currentView in miniCardContainer.eventlistener= ",
-      appState.currentView
-    );
   });
 };

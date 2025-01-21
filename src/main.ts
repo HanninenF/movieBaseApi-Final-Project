@@ -6,6 +6,7 @@ import * as State from "./state/index";
 import { apiKey } from "./keys/apiKey";
 import * as Searchbar from "./components/SearchBar/index";
 import * as Minicard from "./components/MiniCard/createMiniCardContainer";
+import * as BackArrow from "./components/BackArrow/index";
 import { AllDomEl } from "./utils/AllDomEl";
 import { AllTypes } from "./types/types";
 
@@ -112,17 +113,40 @@ if (searchBar && AllDomEl.dropdown && AllDomEl.searchInput) {
 
     /* Functions.renderMiniCard(); */
   });
-}
-const searchButton = document.createElement("button");
-searchButton.classList.add("buttonSearch2");
-searchButton.type = "button";
-searchButton.textContent = "do not press!";
-main.append(searchButton);
 
-console.log("searchButton= ", searchButton);
-searchButton.addEventListener("click", (e) => {
-  e.preventDefault();
-  State.appState.currentView.pop();
-  console.log("currentView at the end of main= ", State.appState.currentView);
-  Functions.renderMiniCard(State.appState.currentView);
-});
+  ///////////////////////////////////
+  ////////////EventListener/////////
+  //////////////////////////////////
+  AllDomEl.miniCardContainer.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    const miniCard = target.closest("button.miniCard") as HTMLButtonElement;
+
+    console.log("button= ", miniCard);
+
+    //hämta id från html-elementet
+    const movieId = miniCard?.getAttribute("data-id");
+    console.log("knapp klickad, data-id= ", movieId);
+    //TODO: fetcha ny data
+    //TODO: currentView
+
+    State.appState.currentView = State.appState.allMovies.filter((movie) =>
+      movie.imdbID === movieId ? movie : null
+    );
+
+    console.log(
+      "State.appstate.currentView in miniCardContainer.eventlistener= ",
+      State.appState.currentView
+    );
+
+    main.appendChild(BackArrow.createBackArrowContainer());
+    const backArrowContainer = document.querySelector(
+      ".backArrowContainer"
+    ) as HTMLDivElement;
+    backArrowContainer.appendChild(BackArrow.createBackArrow());
+    const backArrow = document.querySelector(".backArrow") as HTMLDivElement;
+    console.log("backArrow= ", backArrow);
+    backArrowContainer.appendChild(backArrow);
+
+    Functions.renderBigCard(State.appState.currentView);
+  });
+}
