@@ -118,7 +118,7 @@ if (searchBar && AllDomEl.dropdown && AllDomEl.searchInput) {
   ///////////////////////////////////
   ////////////EventListener/////////
   //////////////////////////////////
-  AllDomEl.viewContainer.addEventListener("click", (e) => {
+  AllDomEl.viewContainer.addEventListener("click", async (e) => {
     const target = e.target as HTMLElement;
     const miniCard = target.closest("button.miniCard") as HTMLButtonElement;
 
@@ -139,6 +139,14 @@ if (searchBar && AllDomEl.dropdown && AllDomEl.searchInput) {
       State.appState.currentView
     );
 
-    Functions.renderBigCard(State.appState.currentView);
+    if (movieId) {
+      const detailedInfo = await Functions.getDetailedInfoById(movieId);
+      console.log(detailedInfo);
+
+      //uppdatera state currentView
+      State.setCurrentViewById(detailedInfo);
+
+      Functions.renderBigCard(State.appState.currentView);
+    }
   });
 }
