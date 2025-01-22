@@ -1,4 +1,4 @@
-import { dropDownOptionsData } from "../data/data";
+import { dropDownOptionsData, movieInfo } from "../data/data";
 export namespace AllTypes {
   export type Root = {
     Search: Search[];
@@ -51,5 +51,8 @@ export namespace AllTypes {
     type: string;
   };
 
+  /* export type CurrentView = (AllTypes.Search | AllTypes.Movie)[]; */
+
   export type Category = (typeof dropDownOptionsData)[number];
+  export type MovieInfo = (typeof movieInfo)[number];
 }

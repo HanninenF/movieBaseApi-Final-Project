@@ -163,9 +163,7 @@ if (searchBar && AllDomEl.dropdown && AllDomEl.searchInput) {
       //uppdatera state currentView
       State.setCurrentViewById(detailedInfo);
 
-      Functions.renderBigCard(State.appState.currentView);
-
-      viewContainer.textContent = "hello";
+      Functions.renderBigCard(State.appState.currentView[0] as AllTypes.Movie);
     }
   });
 }
