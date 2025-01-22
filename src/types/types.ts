@@ -1,4 +1,4 @@
-import { dropDownOptionsData, movieInfo } from "../data/data";
+import { className, dropDownOptionsData, movieInfo } from "../data/data";
 export namespace AllTypes {
   export type Root = {
     Search: Search[];
@@ -51,8 +51,31 @@ export namespace AllTypes {
     type: string;
   };
 
+  export type MovieInfoClasses = {
+    [key: string]: string[];
+    titleDivClass: string[];
+    titleClass: string[];
+    heroClass: string[];
+    runtimeClass: string[];
+    releasedDivClass: string[];
+    releasedClass: string[];
+    genreClass: string[];
+    posterDivClass: string[];
+    posterClass: string[];
+    plotDivClass: string[];
+    plotClass: string[];
+    infoDivClass: string[];
+    infoUlClass: string[];
+    infoLiClass: string[];
+    gradesDivClass: string[];
+    metaGradeClass: string[];
+    tomatoGradeClass: string[];
+    imdbGradeClass: string[];
+  };
+
   /* export type CurrentView = (AllTypes.Search | AllTypes.Movie)[]; */
 
   export type Category = (typeof dropDownOptionsData)[number];
   export type MovieInfo = (typeof movieInfo)[number];
+  export type ClassName = (typeof className)[number];
 }

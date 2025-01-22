@@ -87,6 +87,10 @@ html {
   }
 }
 
+.titleDiv {
+  display: flex;
+}
+
 @media (max-width: 522px) {
   .viewContainer {
     width: 310px;

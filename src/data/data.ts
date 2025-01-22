@@ -33,3 +33,24 @@ export const movieInfo = [
   "Website",
   "Response",
 ] as const;
+
+export const className = [
+  "titleDivClass",
+  "titleClass",
+  "heroClass",
+  "runtimeClass",
+  "releasedDivClass",
+  "releasedClass",
+  "genreClass",
+  "posterDivClass",
+  "posterClass",
+  "plotDivClass",
+  "plotClass",
+  "infoDivClass",
+  "infoUlClass",
+  "infoLiClass",
+  "gradesDivClass",
+  "metaGradeClass",
+  "tomatoGradeClass",
+  "imdbGradeClass",
+] as const;
