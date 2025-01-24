@@ -9,8 +9,17 @@ export const renderBigCard = (currentView: AllTypes.Movie) => {
     return;
   }
 
-  //rensa vyn med content
+  //rensa contentvyn
   AllDomEl.viewContainer.innerHTML = "";
+
+  //listElement som används för dynamisk render av övrig info
+  const movieLiInfoList = {
+    Director: currentView.Director,
+    Writer: currentView.Writer,
+    Actors: currentView.Actors,
+    BoxOffice: currentView.BoxOffice,
+    Rated: currentView.Rated,
+  };
 
   //bigCard
   AllDomEl.viewContainer.appendChild(View.createBigCard());
@@ -70,13 +79,52 @@ export const renderBigCard = (currentView: AllTypes.Movie) => {
   const posterDiv = document.querySelector(".posterDiv") as HTMLDivElement;
 
   //poster
-  posterDiv.append(
+  posterDiv.appendChild(
     View.createMovieInfoElement(
       Functions.getMovieInfoClass(currentView.Title, "posterClass"),
       "img",
       currentView.Poster
     )
   );
+
+  //plotDiv
+  posterDiv.appendChild(
+    View.createMovieInfoElement(
+      Functions.getMovieInfoClass(currentView.Title, "plotDivClass"),
+      "div"
+    )
+  );
+  const plotDiv = document.querySelector(".plotDiv") as HTMLDivElement;
+
+  //plot, ulEl, li
+  plotDiv.append(
+    View.createMovieInfoElement(
+      Functions.getMovieInfoClass(currentView.Title, "plotClass"),
+      "p",
+      currentView.Plot
+    ),
+    plotDiv.appendChild(
+      View.createMovieInfoElement(
+        Functions.getMovieInfoClass(currentView.Title, "infoUlClass"),
+        "ul"
+      )
+    )
+  );
+
+  const ulEl = document.querySelector(".infoUl");
+
+  //movieLiInfoList
+  if (ulEl) {
+    for (const key in movieLiInfoList) {
+      ulEl.appendChild(
+        View.createMovieInfoElement(
+          Functions.getMovieInfoClass(currentView.Title, "infoLiClass"),
+          "li",
+          `${key}: ${movieLiInfoList[key as keyof typeof movieLiInfoList]}`
+        )
+      );
+    }
+  }
 };
 
 //TODO: gör om miniCardContainer till en viewContainer

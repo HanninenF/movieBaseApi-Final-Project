@@ -80,7 +80,7 @@ html {
 }
 
 .backArrowContainer {
-  padding: 2rem 0 0 2rem;
+  padding: 1.5rem 0 0 3rem;
   align-self: flex-start;
   .backArrow {
     fill: black;
@@ -91,6 +91,19 @@ html {
   display: flex;
 }
 
+.releasedDiv {
+  display: flex;
+  justify-content: space-between;
+}
+
+.posterDiv {
+  display: flex;
+}
+
+/*.plotDiv {
+  display: inline;
+}
+*/
 @media (max-width: 522px) {
   .viewContainer {
     width: 310px;

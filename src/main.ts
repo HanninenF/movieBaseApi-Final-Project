@@ -3,7 +3,7 @@ import * as Functions from "./functions/index";
 import * as Utils from "./utils/index";
 import * as State from "./state/index";
 
-import { apiKey } from "./keys/apiKey";
+import { apiKey } from "../src/keys/apiKey";
 import * as Searchbar from "./components/SearchBar/index";
 import * as View from "./components/View/index";
 import * as BackArrow from "./components/BackArrow/index";

@@ -10,6 +10,7 @@ export const renderMiniCard = (currentView: AllTypes.Search[]) => {
 
   AllDomEl.viewContainer.innerHTML = "";
   console.log("clean viewContainer");
+  
 
   currentView.forEach((movie) => {
     console.log(movie.Title);
