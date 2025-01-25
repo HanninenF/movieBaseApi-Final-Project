@@ -27,7 +27,7 @@ export const renderMiniCard = (currentView: AllTypes.Search[]) => {
       //poster
       miniCard.appendChild(View.createPoster(movie));
 
-      const movieInfoUl: AllTypes.MovieInfoUl = {
+      const movieInfoLi: AllTypes.MovieInfoUl = {
         year: movie.Year,
         type: movie.Type,
       };
@@ -37,16 +37,21 @@ export const renderMiniCard = (currentView: AllTypes.Search[]) => {
         `#movieInfoDiv-${movie.imdbID}`
       ) as HTMLDivElement;
 
-      const movieUl = document.createElement("ul");
-      movieUl.classList.add("movieInfoUl");
-      //title
-      movieInfoDiv.append(View.createTitle(movie), movieUl);
+      //title, movieUl
+      movieInfoDiv.append(
+        View.createTitle(movie),
+        View.createMovieInfoUl(movie)
+      );
 
-      for (const key in movieInfoUl) {
+      const movieUl = document.querySelector(
+        `#movieInfoUl-${movie.imdbID}`
+      ) as HTMLUListElement;
+
+      for (const key in movieInfoLi) {
         const liElMovieInfo = document.createElement("li");
         liElMovieInfo.classList.add("liEl", key);
         liElMovieInfo.textContent =
-          movieInfoUl[key as keyof typeof movieInfoUl];
+          movieInfoLi[key as keyof typeof movieInfoLi];
         movieUl.appendChild(liElMovieInfo);
       }
     } else {
