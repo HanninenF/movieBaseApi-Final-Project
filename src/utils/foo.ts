@@ -5,7 +5,7 @@ export const foo = <T extends keyof HTMLElementTagNameMap>(
   elementTag: T,
   movieInfo?: AllTypes.Movie | AllTypes.Search,
   ariaLabel?: string,
-  movieInfo2?: string
+  text_content?: string
 ): HTMLElementTagNameMap[T] => {
   const element = document.createElement(elementTag);
   className.forEach((classname) => {
@@ -14,20 +14,25 @@ export const foo = <T extends keyof HTMLElementTagNameMap>(
   if (movieInfo) {
     if (elementTag === "img" && element instanceof HTMLImageElement) {
       element.src = movieInfo.Poster;
-      element.id = movieInfo.imdbID;
+      element.id = `${className[0]}-${movieInfo.imdbID}`;
       element.loading = "lazy";
       element.alt = "Movie Title";
     } else if (
       elementTag === "button" &&
       element instanceof HTMLButtonElement
     ) {
-      element.id = movieInfo.imdbID;
+      element.id = `${className[0]}-${movieInfo.imdbID}`;
       element.setAttribute("data-id", movieInfo.imdbID);
       element.setAttribute("aria-label", `${ariaLabel} ${movieInfo.Title}`);
       element.type = "button";
     } else {
-      element.id = movieInfo.imdbID;
-      element.textContent = movieInfo2 || "";
+      element.id = `${className[0]}-${movieInfo.imdbID}`;
+      if (ariaLabel !== undefined) {
+        element.setAttribute("aria-label", `${ariaLabel}`);
+      }
+      if (movieInfo !== undefined) {
+        element.textContent = text_content || "";
+      }
     }
   }
   return element;

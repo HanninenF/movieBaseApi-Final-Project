@@ -21,13 +21,8 @@ export const renderMiniCard = (currentView: AllTypes.Search[]) => {
       //TODO: gör samma på BigCard
       AllDomEl.viewContainer.appendChild(View.createMiniCard(movie));
       const miniCard = document.querySelector(
-        `#${movie.imdbID}`
+        `#miniCard-${movie.imdbID}`
       ) as HTMLButtonElement;
-
-      //title
-      const title = document.createElement("h3");
-      title.classList.add("miniTitle");
-      title.textContent = movie.Title;
 
       //poster
       miniCard.appendChild(View.createPoster(movie));
@@ -37,12 +32,14 @@ export const renderMiniCard = (currentView: AllTypes.Search[]) => {
         type: movie.Type,
       };
 
-      const movieInfoDiv = document.createElement("div");
-      movieInfoDiv.classList.add("movieInfoDiv");
-      miniCard.appendChild(movieInfoDiv);
+      miniCard.appendChild(View.createMovieInfoDiv(movie));
+      const movieInfoDiv = document.querySelector(
+        `#movieInfoDiv-${movie.imdbID}`
+      ) as HTMLDivElement;
 
       const movieUl = document.createElement("ul");
       movieUl.classList.add("movieInfoUl");
+      //title
       movieInfoDiv.append(View.createTitle(movie), movieUl);
 
       for (const key in movieInfoUl) {
