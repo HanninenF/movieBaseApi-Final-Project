@@ -5,7 +5,7 @@ import * as State from "./state/index";
 
 import { apiKey } from "../src/keys/apiKey";
 import * as Searchbar from "./components/SearchBar/index";
-import * as View from "./components/View/index";
+import * as View from "./components/View/index/index";
 import * as BackArrow from "./components/BackArrow/index";
 import { AllDomEl } from "./utils/AllDomEl";
 import { AllTypes } from "./types/types";

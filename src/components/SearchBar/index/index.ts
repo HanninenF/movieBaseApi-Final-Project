@@ -5,3 +5,4 @@ export * from "../SearchBarContainer";
 export * from "../SearchBar";
 export * from "../DropdownContainer";
 export * from "../InputContainer";
+//TODO: döp om till searchBarIndex

@@ -42,7 +42,7 @@ export const renderBigCard = (currentView: AllTypes.Movie) => {
       currentView.Poster
     ),
     View.createMovieInfoElement(
-      Functions.getMovieInfoClass(currentView.Title, "runtimeClass"),
+      [],
       "h3",
       currentView.Runtime
     )

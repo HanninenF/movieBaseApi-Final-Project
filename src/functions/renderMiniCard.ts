@@ -1,6 +1,5 @@
 import { AllTypes } from "../types/types";
 import { AllDomEl } from "../utils/AllDomEl";
-import * as Utils from "../utils/index";
 import * as View from "../components/View/MiniCard/miniCardIndex/miniCardIndex";
 export const renderMiniCard = (currentView: AllTypes.Search[]) => {
   console.log("AllDomEl.viewContainer= ", AllDomEl.viewContainer);
@@ -27,11 +26,6 @@ export const renderMiniCard = (currentView: AllTypes.Search[]) => {
       //poster
       miniCard.appendChild(View.createPoster(movie));
 
-      const movieInfoLi: AllTypes.MovieInfoUl = {
-        year: movie.Year,
-        type: movie.Type,
-      };
-
       miniCard.appendChild(View.createMovieInfoDiv(movie));
       const movieInfoDiv = document.querySelector(
         `#movieInfoDiv-${movie.imdbID}`
@@ -47,11 +41,15 @@ export const renderMiniCard = (currentView: AllTypes.Search[]) => {
         `#movieInfoUl-${movie.imdbID}`
       ) as HTMLUListElement;
 
+      //Listdata
+      const movieInfoLi: AllTypes.MovieInfoUl = {
+        year: movie.Year,
+        type: movie.Type,
+      };
+
+      //LiElements
       for (const key in movieInfoLi) {
-        const liElMovieInfo = document.createElement("li");
-        liElMovieInfo.classList.add("liEl", key);
-        liElMovieInfo.textContent =
-          movieInfoLi[key as keyof typeof movieInfoLi];
+        const liElMovieInfo = View.movieInfoListEl(movie, movieInfoLi, key);
         movieUl.appendChild(liElMovieInfo);
       }
     } else {
