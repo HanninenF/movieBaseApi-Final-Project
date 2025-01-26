@@ -12,6 +12,7 @@ export const foo = <T extends keyof HTMLElementTagNameMap>(
   className.forEach((classname) => {
     element.classList.add(classname);
   });
+  //lägg till övriga attribut utifrån elementtyp
   if (movieInfo) {
     if (elementTag === "img" && element instanceof HTMLImageElement) {
       element.src = movieInfo.Poster;

@@ -26,7 +26,13 @@ export const renderBigCard = (currentView: AllTypes.Movie) => {
   const bigCard = document.querySelector(".bigCard") as HTMLDivElement;
 
   //titleDiv
-  bigCard.appendChild(View.createTitleDiv());
+  bigCard.appendChild(
+    View.createMovieInfoElement(
+      Functions.getMovieInfoClass(currentView.Title, "titleDivClass"),
+      "div",
+      currentView.Poster
+    )
+  );
   const titleDiv = document.querySelector(".titleDiv") as HTMLDivElement;
 
   //title, hero, runtime
@@ -41,11 +47,7 @@ export const renderBigCard = (currentView: AllTypes.Movie) => {
       "img",
       currentView.Poster
     ),
-    View.createMovieInfoElement(
-      [],
-      "h3",
-      currentView.Runtime
-    )
+    View.createMovieInfoElement([], "h3", currentView.Runtime)
   );
   //releasedDiv
   bigCard.appendChild(

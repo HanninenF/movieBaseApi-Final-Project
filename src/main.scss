@@ -1,4 +1,5 @@
 @use "./components/SearchBar/index/index.scss";
+@use "./variables.scss" as globalVar;
 
 /* TODO: flytta till komponenter */
 
@@ -89,23 +90,136 @@ html {
   }
 }
 
-.titleDiv {
+.bigCard {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 621px;
+  position: relative; /*Gör att barn kan använda positioneringssystem */
+  .titleDiv {
+    height: 200px; /* Ange höjd för hero-sektionen */
+    width: globalVar.$heroItemsWidth;
+    display: flex; /* Om du vill centrera textinnehåll */
+    /* align-items: center; /* Vertikal centrering 
+    justify-content: center; /* Horisontell centrering */
+    justify-content: space-between;
+    h1 {
+      font-size: 2rem; /* Stor text */
+      color: white; /* Textfärg */
+      text-shadow:
+        -1px -1px 2px black,
+        /* Övre vänstra */ 1px -1px 2px black,
+        /* Övre högra */ -1px 1px 2px black,
+        /* Nedre vänstra */ 1px 1px 2px black,
+        /* Nedre högra */ -2px -2px 4px black,
+        /* Mer utsträckt skugga */ 2px -2px 4px black,
+        -2px 2px 4px black,
+        2px 2px 4px black,
+        0px 0px 10px black; /* Suddig skugga för en "glow"-effekt */
+    }
+    h3 {
+      font-size: 1.5rem; /* Stor text */
+      font-weight: normal;
+      color: white; /* Textfärg */
+      text-shadow:
+        -1px -1px 2px black,
+        /* Övre vänstra */ 1px -1px 2px black,
+        /* Övre högra */ -1px 1px 2px black,
+        /* Nedre vänstra */ 1px 1px 2px black,
+        /* Nedre högra */ -2px -2px 4px black,
+        /* Mer utsträckt skugga */ 2px -2px 4px black,
+        -2px 2px 4px black,
+        2px 2px 4px black,
+        0px 0px 10px black; /* Suddig skugga för en "glow"-effekt */
+      padding-top: 8px;
+    }
+
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 1rem 1rem 0 1rem;
+    border-bottom: 2px solid black;
+    padding: 1rem;
+
+    img {
+      display: none;
+    }
+    position: relative;
+
+    /* Svart täcke */
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: black; /* Svart färg */
+      opacity: 0.5; /* Ändra transparensen här (0 = helt genomskinligt, 1 = helt svart) */
+      z-index: 1; /* Lägg det ovanför bilden */
+      pointer-events: none; /* Förhindra att det påverkar klick */
+    }
+
+    /* Texten ovanför overlay */
+    h1,
+    h3 {
+      position: relative;
+      z-index: 2; /* Lägg texten ovanför overlay */
+    }
+  }
+  .releasedDiv {
+    display: flex;
+    justify-content: space-between;
+    width: globalVar.$heroItemsWidth;
+    position: absolute; /* Behåll positionen inom `titleDiv` */
+    top: 160px;
+    color: white; /*För bättre kontrast mot bakgrunden */
+    padding: 10px; /* Valfri padding för layout */
+    h3 {
+      font-size: 1.5rem;
+      font-weight: normal;
+      color: white; /* Textfärg */
+      text-shadow:
+        -1px -1px 2px black,
+        /* Övre vänstra */ 1px -1px 2px black,
+        /* Övre högra */ -1px 1px 2px black,
+        /* Nedre vänstra */ 1px 1px 2px black,
+        /* Nedre högra */ -2px -2px 4px black,
+        /* Mer utsträckt skugga */ 2px -2px 4px black,
+        -2px 2px 4px black,
+        2px 2px 4px black,
+        0px 0px 10px black; /* Suddig skugga för en "glow"-effekt */
+      z-index: 2;
+    }
+    h4 {
+      font-size: 1rem;
+      font-weight: normal;
+      padding-top: 8px;
+      color: white; /* Textfärg */
+      text-shadow:
+        -1px -1px 2px black,
+        /* Övre vänstra */ 1px -1px 2px black,
+        /* Övre högra */ -1px 1px 2px black,
+        /* Nedre vänstra */ 1px 1px 2px black,
+        /* Nedre högra */ -2px -2px 4px black,
+        /* Mer utsträckt skugga */ 2px -2px 4px black,
+        -2px 2px 4px black,
+        2px 2px 4px black,
+        0px 0px 10px black; /* Suddig skugga för en "glow"-effekt */
+      z-index: 2;
+    }
+  }
+
+  .posterDiv {
+    display: flex;
+    img {
+    }
+  }
+
+  /*.plotDiv {
+    display: inline;
+  }*/
 }
 
-.releasedDiv {
-  display: flex;
-  justify-content: space-between;
-}
-
-.posterDiv {
-  display: flex;
-}
-
-/*.plotDiv {
-  display: inline;
-}
-*/
 @media (max-width: 522px) {
   .viewContainer {
     width: 310px;
