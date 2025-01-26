@@ -8,16 +8,17 @@ export const renderMiniCard = (currentView: AllTypes.Search[]) => {
     return;
   }
 
+  //rensa all content i view
   AllDomEl.viewContainer.innerHTML = "";
   console.log("clean viewContainer");
 
+  //appenda alla filmer i State.currentView
   currentView.forEach((movie) => {
     if (!("Runtime" in movie)) {
       console.log(movie.Title);
 
-      //miniCard
-
       //TODO: gör samma på BigCard
+      //miniCard
       AllDomEl.viewContainer.appendChild(View.createMiniCard(movie));
       const miniCard = document.querySelector(
         `#miniCard-${movie.imdbID}`
@@ -42,15 +43,19 @@ export const renderMiniCard = (currentView: AllTypes.Search[]) => {
       ) as HTMLUListElement;
 
       //Listdata
-      const movieInfoLi: AllTypes.MovieInfoUl = {
+      const movieInfoListData: AllTypes.MoeInfoListData = {
         year: movie.Year,
         type: movie.Type,
       };
 
-      //LiElements
-      for (const key in movieInfoLi) {
-        const liElMovieInfo = View.movieInfoListEl(movie, movieInfoLi, key);
-        movieUl.appendChild(liElMovieInfo);
+      //ListElements
+      for (const key in movieInfoListData) {
+        const listItemElement = View.createMovieInfoListItem(
+          movie,
+          movieInfoListData,
+          key
+        );
+        movieUl.appendChild(listItemElement);
       }
     } else {
       console.log(`${movie.Runtime} is of type Movie`);

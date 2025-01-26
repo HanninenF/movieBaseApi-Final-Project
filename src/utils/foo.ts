@@ -7,6 +7,7 @@ export const foo = <T extends keyof HTMLElementTagNameMap>(
   ariaLabel?: string,
   text_content?: string
 ): HTMLElementTagNameMap[T] => {
+  //lägg till klasser
   const element = document.createElement(elementTag);
   className.forEach((classname) => {
     element.classList.add(classname);
@@ -16,7 +17,7 @@ export const foo = <T extends keyof HTMLElementTagNameMap>(
       element.src = movieInfo.Poster;
       element.id = `${className[0]}-${movieInfo.imdbID}`;
       element.loading = "lazy";
-      element.alt = "Movie Title";
+      element.alt = "Movie Poster";
     } else if (
       elementTag === "button" &&
       element instanceof HTMLButtonElement

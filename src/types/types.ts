@@ -46,7 +46,7 @@ export namespace AllTypes {
     Value: string;
   };
 
-  export type MovieInfoUl = {
+  export type MoeInfoListData = {
     year: string;
     type: string;
   };

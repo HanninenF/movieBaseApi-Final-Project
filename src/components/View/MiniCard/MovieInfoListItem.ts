@@ -1,18 +1,18 @@
 import { AllTypes } from "../../../types/types";
 import * as Utils from "../../../utils/index";
 
-export const movieInfoListEl = (
+export const createMovieInfoListItem = (
   movie: AllTypes.Search,
-  movieInfoLi: AllTypes.MovieInfoUl,
+  listData: AllTypes.MoeInfoListData,
   key: string
 ) => {
-  const liElMovieInfo = Utils.foo(
+  const listItemElement = Utils.foo(
     ["liEl", Utils.getSanitizedString(movie.Title)],
     "li",
     movie,
     `List Element with additional movie info: ${key}`,
-    movieInfoLi[key as keyof typeof movieInfoLi]
+    listData[key as keyof typeof listData]
   );
 
-  return liElMovieInfo;
+  return listItemElement;
 };
