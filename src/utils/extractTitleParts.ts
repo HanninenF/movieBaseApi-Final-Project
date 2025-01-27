@@ -1,4 +1,4 @@
-export const goo = (
+export const extractTitleParts = (
   textContent: string
 ): { firstPart: string; secondPart: string } => {
   //TODO: byt namn till extractTitleParts

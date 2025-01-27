@@ -6,7 +6,6 @@ export const createCustomElement = <T extends keyof HTMLElementTagNameMap>(
   ariaLabel?: string,
   text_content?: string
 ): HTMLElementTagNameMap[T] => {
-  //TODO: byt namn till createCustomElement
   //lägg till klasser
   const element = document.createElement(elementTag);
   className.forEach((classname) => {

@@ -12,7 +12,7 @@ export const titleFooForSeparationAtColon = <
   element: HTMLElementTagNameMap[T];
   textParts: { firstPart: string; secondPart: string };
 } => {
-  //TODO: byt namn till createHeadingWithColonSplit
+  //TODO: byt namn till createTitleElementWithColonSplit
   //lägg till klasser
   const element = document.createElement(elementTag);
   className.forEach((classname) => {
@@ -30,7 +30,8 @@ export const titleFooForSeparationAtColon = <
         element.setAttribute("aria-label", `${ariaLabel}`);
       }
       if (movieInfo !== undefined) {
-        const textParts = Utils.goo(text_content);
+        //TODO: byt namn på textParts till splitTitleParts
+        const textParts = Utils.extractTitleParts(text_content);
         return { element, textParts };
       }
     }
