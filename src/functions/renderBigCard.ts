@@ -30,12 +30,12 @@ export const renderBigCard = (currentView: AllTypes.Movie) => {
   const title = View.createTitle(currentView);
   console.log("elements and splitTitleParts: ", title);
   console.log("title.element.id= ", title.titleElement.id);
-  if (title.secondElement) {
+  if (title.subtitleElement) {
     const titleTextH1 = title.splitTitleParts.firstPart;
     const titleTextH3 = title.splitTitleParts.secondPart;
     const titleH1Element = title.titleElement;
     titleH1Element.textContent = titleTextH1;
-    const titleH3Element = title.secondElement;
+    const titleH3Element = title.subtitleElement;
     titleH3Element.textContent = titleTextH3;
     titleH3Element.id = "titleFooForSeparationAtColon";
 
