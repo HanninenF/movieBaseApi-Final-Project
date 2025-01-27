@@ -1,5 +1,5 @@
 import { AllTypes } from "../types/types";
-
+import * as Utils from "../utils/index";
 export const foo = <T extends keyof HTMLElementTagNameMap>(
   className: string[],
   elementTag: T,

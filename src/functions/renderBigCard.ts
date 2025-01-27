@@ -28,8 +28,29 @@ export const renderBigCard = (currentView: AllTypes.Movie) => {
   const titleDiv = document.querySelector(".titleDiv") as HTMLDivElement;
 
   //title, hero, runtime
+  const title = View.createTitle(currentView);
+  console.log("elements and textParts: ", title);
+  console.log("title.element.id= ", title.element.id);
+  if (title.secondElement) {
+    const titleTextH1 = title.textParts.firstPart;
+    const titleTextH3 = title.textParts.secondPart;
+    const titleH1Element = title.element;
+    titleH1Element.textContent = titleTextH1;
+    const titleH3Element = title.secondElement;
+    titleH3Element.textContent = titleTextH3;
+    titleH3Element.id = "titleFooForSeparationAtColon";
+
+    titleDiv.appendChild(titleH1Element);
+
+    console.log("H1", titleH1Element);
+    titleH1Element.appendChild(titleH3Element);
+  } else {
+    const titleTextH1 = title.textParts.firstPart;
+    const titleH1Element = title.element;
+    titleH1Element.textContent = titleTextH1;
+    titleDiv.appendChild(titleH1Element);
+  }
   titleDiv.append(
-    View.createTitle(currentView),
     View.createHero(currentView),
     View.createRuntime(currentView)
   );
@@ -89,4 +110,7 @@ export const renderBigCard = (currentView: AllTypes.Movie) => {
   }
 };
 
-//TODO: gör om miniCardContainer till en viewContainer
+//TODO: fixa så att titeln i bigCard skriver The Lord of the Rings: med 2rem och efter en separation med kolon skriv The Fellowship of the Ring mindre
+//TODO: centralisera och återanvänd komponenter som Title istället för att göra varsin för miniCard och BigCard
+//TODO: om N/A Runtime ska vara tom
+//TODO: om BoxOffice: undefined ska vara tom
