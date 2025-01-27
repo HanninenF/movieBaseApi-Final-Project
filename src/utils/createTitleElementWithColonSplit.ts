@@ -1,6 +1,6 @@
 import { AllTypes } from "../types/types";
-import * as Utils from "../utils/index";
-export const titleFooForSeparationAtColon = <
+import * as Utils from "./index";
+export const createTitleElementWithColonSplit = <
   T extends keyof HTMLElementTagNameMap,
 >(
   className: string[],

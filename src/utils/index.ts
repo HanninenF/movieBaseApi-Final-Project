@@ -4,4 +4,4 @@ export * from "./getUrlParametersFromWord";
 export * from "./getSanitizedString";
 export * from "./createCustomElement";
 export * from "./extractTitleParts";
-export * from "./titleFooForSeparationAtColon";
+export * from "./createTitleElementWithColonSplit";

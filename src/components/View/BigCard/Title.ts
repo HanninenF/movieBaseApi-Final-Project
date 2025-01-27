@@ -9,7 +9,7 @@ export const createTitle = (
 } => {
   //TODO: byt namn på textParts till splitTitleParts
   //TODO: byt namn på secondElement till subtitleElement
-  const title = Utils.titleFooForSeparationAtColon(
+  const title = Utils.createTitleElementWithColonSplit(
     ["title"],
     "h1",
     movie,
