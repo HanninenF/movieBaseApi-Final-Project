@@ -5,9 +5,8 @@ export const createTitle = (
 ): {
   titleElement: HTMLHeadingElement;
   secondElement?: HTMLHeadElement;
-  textParts: { firstPart: string; secondPart: string };
+  splitTitleParts: { firstPart: string; secondPart: string };
 } => {
-  //TODO: byt namn på textParts till splitTitleParts
   //TODO: byt namn på secondElement till subtitleElement
   const title = Utils.createTitleElementWithColonSplit(
     ["title"],
@@ -16,19 +15,22 @@ export const createTitle = (
     "",
     movie.Title
   );
-  if (title.textParts.secondPart !== "") {
+  if (title.splitTitleParts.secondPart !== "") {
     const secondPartElement = Utils.createCustomElement(
       ["title"],
       "span",
       movie,
       "",
-      title.textParts.secondPart
+      title.splitTitleParts.secondPart
     );
     return {
       titleElement: title.element,
       secondElement: secondPartElement,
-      textParts: title.textParts,
+      splitTitleParts: title.splitTitleParts,
     };
   }
-  return { titleElement: title.element, textParts: title.textParts };
+  return {
+    titleElement: title.element,
+    splitTitleParts: title.splitTitleParts,
+  };
 };

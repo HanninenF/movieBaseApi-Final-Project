@@ -18,7 +18,7 @@ export const renderBigCard = (currentView: AllTypes.Movie) => {
 
   //titleDiv som ska innehålla hero
   bigCard.appendChild(
-    View.foo(
+    View.createHeroContainer(
       Functions.getMovieInfoClass(currentView.Title, "titleDivClass"),
       "div",
       currentView.Poster
@@ -28,11 +28,11 @@ export const renderBigCard = (currentView: AllTypes.Movie) => {
 
   //title, hero, runtime
   const title = View.createTitle(currentView);
-  console.log("elements and textParts: ", title);
+  console.log("elements and splitTitleParts: ", title);
   console.log("title.element.id= ", title.titleElement.id);
   if (title.secondElement) {
-    const titleTextH1 = title.textParts.firstPart;
-    const titleTextH3 = title.textParts.secondPart;
+    const titleTextH1 = title.splitTitleParts.firstPart;
+    const titleTextH3 = title.splitTitleParts.secondPart;
     const titleH1Element = title.titleElement;
     titleH1Element.textContent = titleTextH1;
     const titleH3Element = title.secondElement;
@@ -44,7 +44,7 @@ export const renderBigCard = (currentView: AllTypes.Movie) => {
     console.log("H1", titleH1Element);
     titleH1Element.appendChild(titleH3Element);
   } else {
-    const titleTextH1 = title.textParts.firstPart;
+    const titleTextH1 = title.splitTitleParts.firstPart;
     const titleH1Element = title.titleElement;
     titleH1Element.textContent = titleTextH1;
     titleDiv.appendChild(titleH1Element);
@@ -77,12 +77,7 @@ export const renderBigCard = (currentView: AllTypes.Movie) => {
   //plot, ulEl, li
   plotDiv.append(
     View.createPlot(currentView),
-    plotDiv.appendChild(
-      View
-        .createMovieInfoUl
-        //TODO: vad ska jag döpa ul och list data och element till kolla miniCard
-        ()
-    )
+    plotDiv.appendChild(View.createMovieInfoUl())
   );
 
   const movieUl = document.querySelector(".infoUl");

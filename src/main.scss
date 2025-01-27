@@ -178,8 +178,7 @@ html {
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: black; /* Svart färg */
-      opacity: 0.6; /* Ändra transparensen här (0 = helt genomskinligt, 1 = helt svart) */
+      background-color: hsl(0deg 0% 0% / 53%);
       z-index: 1; /* Lägg det ovanför bilden */
       pointer-events: none; /* Förhindra att det påverkar klick */
     }

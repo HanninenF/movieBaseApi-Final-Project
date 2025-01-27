@@ -1,4 +1,4 @@
-export const foo = <T extends keyof HTMLElementTagNameMap>(
+export const createHeroContainer = <T extends keyof HTMLElementTagNameMap>(
   className: string[],
   elementTag: T,
   movieInfo?: string

@@ -10,9 +10,8 @@ export const createTitleElementWithColonSplit = <
   text_content?: string
 ): {
   element: HTMLElementTagNameMap[T];
-  textParts: { firstPart: string; secondPart: string };
+  splitTitleParts: { firstPart: string; secondPart: string };
 } => {
-  //TODO: byt namn till createTitleElementWithColonSplit
   //lägg till klasser
   const element = document.createElement(elementTag);
   className.forEach((classname) => {
@@ -30,11 +29,13 @@ export const createTitleElementWithColonSplit = <
         element.setAttribute("aria-label", `${ariaLabel}`);
       }
       if (movieInfo !== undefined) {
-        //TODO: byt namn på textParts till splitTitleParts
-        const textParts = Utils.extractTitleParts(text_content);
-        return { element, textParts };
+        const splitTitleParts = Utils.extractTitleParts(text_content);
+        return { element, splitTitleParts: splitTitleParts };
       }
     }
   }
-  return { element: element, textParts: { firstPart: "", secondPart: "" } };
+  return {
+    element: element,
+    splitTitleParts: { firstPart: "", secondPart: "" },
+  };
 };

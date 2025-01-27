@@ -1,5 +1,5 @@
 export * from "../createBigCard";
-export * from "../foo";
+export * from "../createHeroContainer";
 export * from "../titleDiv";
 export * from "../Hero";
 export * from "../Runtime";
