@@ -6,7 +6,7 @@ export const createMovieInfoListItem = (
   listData: AllTypes.MoeInfoListData,
   key: string
 ) => {
-  const listItemElement = Utils.foo(
+  const listItemElement = Utils.createCustomElement(
     ["liEl", Utils.getSanitizedString(movie.Title)],
     "li",
     movie,

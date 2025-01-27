@@ -1,7 +1,7 @@
 import { AllTypes } from "../../../types/types";
 import * as Utils from "../../../utils/index";
 export const createMovieInfoUl = (movie: AllTypes.Search) => {
-  const movieInfoUl = Utils.foo(
+  const movieInfoUl = Utils.createCustomElement(
     ["movieInfoUl", Utils.getSanitizedString(movie.Title)],
     "ul",
     movie,

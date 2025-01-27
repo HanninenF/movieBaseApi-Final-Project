@@ -3,10 +3,12 @@ import * as Utils from "../../../utils/index";
 export const createTitle = (
   movie: AllTypes.Movie
 ): {
-  element: HTMLHeadingElement;
+  titleElement: HTMLHeadingElement;
   secondElement?: HTMLHeadElement;
   textParts: { firstPart: string; secondPart: string };
 } => {
+  //TODO: byt namn på textParts till splitTitleParts
+  //TODO: byt namn på secondElement till subtitleElement
   const title = Utils.titleFooForSeparationAtColon(
     ["title"],
     "h1",
@@ -15,7 +17,7 @@ export const createTitle = (
     movie.Title
   );
   if (title.textParts.secondPart !== "") {
-    const secondPartElement = Utils.foo(
+    const secondPartElement = Utils.createCustomElement(
       ["title"],
       "span",
       movie,
@@ -23,10 +25,10 @@ export const createTitle = (
       title.textParts.secondPart
     );
     return {
-      element: title.element,
+      titleElement: title.element,
       secondElement: secondPartElement,
       textParts: title.textParts,
     };
   }
-  return { element: title.element, textParts: title.textParts };
+  return { titleElement: title.element, textParts: title.textParts };
 };

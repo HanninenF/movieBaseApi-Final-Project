@@ -12,6 +12,7 @@ export const titleFooForSeparationAtColon = <
   element: HTMLElementTagNameMap[T];
   textParts: { firstPart: string; secondPart: string };
 } => {
+  //TODO: byt namn till createHeadingWithColonSplit
   //lägg till klasser
   const element = document.createElement(elementTag);
   className.forEach((classname) => {

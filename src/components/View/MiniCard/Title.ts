@@ -1,7 +1,7 @@
 import { AllTypes } from "../../../types/types";
 import * as Utils from "../../../utils/index";
 export const createTitle = (movie: AllTypes.Search): HTMLHeadingElement => {
-  const title = Utils.foo(
+  const title = Utils.createCustomElement(
     ["miniTitle", Utils.getSanitizedString(movie.Title)],
     "h3",
     movie,

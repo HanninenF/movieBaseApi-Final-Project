@@ -1,12 +1,12 @@
 import { AllTypes } from "../types/types";
-import * as Utils from "../utils/index";
-export const foo = <T extends keyof HTMLElementTagNameMap>(
+export const createCustomElement = <T extends keyof HTMLElementTagNameMap>(
   className: string[],
   elementTag: T,
   movieInfo?: AllTypes.Movie | AllTypes.Search,
   ariaLabel?: string,
   text_content?: string
 ): HTMLElementTagNameMap[T] => {
+  //TODO: byt namn till createCustomElement
   //lägg till klasser
   const element = document.createElement(elementTag);
   className.forEach((classname) => {

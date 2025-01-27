@@ -1,4 +1,7 @@
-export const goo = (textContent: string) => {
+export const goo = (
+  textContent: string
+): { firstPart: string; secondPart: string } => {
+  //TODO: byt namn till extractTitleParts
   if (textContent.includes(":")) {
     const [beforeColon, afterColon] = textContent.split(":", 2);
 
