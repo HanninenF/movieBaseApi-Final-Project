@@ -32,17 +32,17 @@ export const renderBigCard = (currentView: AllTypes.Movie) => {
   console.log("title.element.id= ", title.titleElement.id);
   if (title.subtitleElement) {
     const titleTextH1 = title.splitTitleParts.firstPart;
-    const titleTextH3 = title.splitTitleParts.secondPart;
+    const titleTextSpan = title.splitTitleParts.secondPart;
     const titleH1Element = title.titleElement;
     titleH1Element.textContent = titleTextH1;
-    const titleH3Element = title.subtitleElement;
-    titleH3Element.textContent = titleTextH3;
-    titleH3Element.id = "titleFooForSeparationAtColon";
+    const titleSpanElement = title.subtitleElement;
+    titleSpanElement.textContent = titleTextSpan;
+    titleSpanElement.id = "titleSpanElementWithColonSplit";
 
     titleDiv.appendChild(titleH1Element);
 
     console.log("H1", titleH1Element);
-    titleH1Element.appendChild(titleH3Element);
+    titleH1Element.appendChild(titleSpanElement);
   } else {
     const titleTextH1 = title.splitTitleParts.firstPart;
     const titleH1Element = title.titleElement;
