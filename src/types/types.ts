@@ -47,8 +47,13 @@ export namespace AllTypes {
   };
 
   export type MoeInfoListData = {
-    year: string;
-    type: string;
+    year?: string;
+    type?: string;
+    Director?: string;
+    Writer?: string;
+    Actors?: string;
+    BoxOffice?: string;
+    Rated?: string;
   };
 
   export type MovieInfoClasses = {
