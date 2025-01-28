@@ -1,12 +1,12 @@
 import "./main.scss";
-import * as Functions from "./functions/index";
-import * as Utils from "./utils/index";
-import * as State from "./state/index";
+import * as Functions from "./functions/functionsIndex/functionsIndex";
+import * as Utils from "./utils/utilsIndex/utilsIndex";
+import * as State from "./state/stateIndex/stateIndex";
 
 import { apiKey } from "../src/keys/apiKey";
-import * as Searchbar from "./components/SearchBar/index";
-import * as View from "./components/View/index/index";
-import * as BackArrow from "./components/BackArrow/index";
+import * as Searchbar from "./components/SearchBar/searchBarIndex/searchBarIndex";
+import * as View from "./components/View/viewIndex/viewIndex";
+import * as BackArrow from "./components/BackArrow/backArrowIndex/backArrowIndex";
 import { AllDomEl } from "./utils/AllDomEl";
 import { AllTypes } from "./types/types";
 
@@ -132,10 +132,6 @@ if (searchBar && AllDomEl.dropdown && AllDomEl.searchInput) {
   ////////////EventListener/////////
   //////////////////////////////////
   AllDomEl.viewContainer.addEventListener("click", async (e) => {
-    const viewContainer = document.querySelector(
-      ".viewContainer"
-    ) as HTMLDivElement;
-
     const target = e.target as HTMLElement;
     const miniCard = target.closest("button.miniCard") as HTMLButtonElement;
 

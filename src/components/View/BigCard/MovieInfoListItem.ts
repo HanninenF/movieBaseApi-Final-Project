@@ -1,5 +1,5 @@
 import { AllTypes } from "../../../types/types";
-import * as Utils from "../../../utils/index";
+import * as Utils from "../../../utils/utilsIndex/utilsIndex";
 export const createMovieInfoListItem = (
   movie: AllTypes.Movie,
   listData: AllTypes.MoeInfoListData,

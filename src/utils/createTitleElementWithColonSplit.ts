@@ -1,5 +1,5 @@
 import { AllTypes } from "../types/types";
-import * as Utils from "./index";
+import * as Utils from "./utilsIndex/utilsIndex";
 export const createTitleElementWithColonSplit = <
   T extends keyof HTMLElementTagNameMap,
 >(

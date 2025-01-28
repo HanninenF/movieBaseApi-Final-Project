@@ -1,7 +1,7 @@
 import { AllTypes } from "../types/types";
 import { AllDomEl } from "../utils/AllDomEl";
 import * as View from "../components/View/BigCard/bigCardIndex/bigCardIndex";
-import * as Functions from "./index";
+import * as Functions from "./functionsIndex/functionsIndex";
 
 export const renderBigCard = (currentView: AllTypes.Movie) => {
   if (!AllDomEl.viewContainer) {

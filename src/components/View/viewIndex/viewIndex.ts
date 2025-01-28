@@ -1,1 +1,2 @@
-export * from "../BigCard/createHeroContainer";
+export * from "../createViewContainer";
+//TODO: flytta till viewIndex
