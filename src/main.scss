@@ -1,6 +1,7 @@
 @use "./components/SearchBar/searchBarIndex//searchBarIndex.scss";
+@use "./components/View/MiniCard/miniCardIndex/miniCardIndex.scss";
 @use "./styleHelpers/mixin.scss" as mixin;
-@use "./variables.scss" as globalVar;
+@use "./styleHelpers/variables.scss" as globalVar;
 
 /* TODO: flytta till komponenter */
 
@@ -18,7 +19,7 @@ html {
   @include mixin.flexCenter(column, center, normal);
 }
 .viewContainer {
-  border-radius: 20px;
+  border-radius: globalVar.$borderRadius;
   align-self: center;
   background-color: globalVar.$cardBackgroundColor;
   /* margin: 2rem 0 0 9rem; */
@@ -26,62 +27,6 @@ html {
   width: 620px;
   grid-template-columns: repeat(2, 1fr);
   /* gap: 1rem; */
-
-  .miniCard {
-    appearance: none;
-    max-width: 311px;
-    display: flex;
-    /* height: 1px; */
-    /* border: 1px solid #ddd; */
-    border: none;
-    border-bottom: 2px solid black;
-    /* border-radius: 5px; */
-    border-radius: 0;
-    padding: 10px;
-    /* background-color: white; */
-    background-color: inherit;
-    cursor: pointer;
-    transition:
-      transform 0.2s,
-      box-shadow 0.2s;
-    img {
-      width: 100%; /* Bilden anpassar sig till kortet */
-      /* width: 2px; */
-      max-width: 80px;
-      /* min-width: 50px */
-      height: auto;
-      border-radius: 5px;
-    }
-    .movieInfoDiv {
-      @include mixin.flexCenter(column, normal, flex-start);
-      align-self: end;
-      padding-left: 10px;
-
-      h3 {
-        font-size: 1rem;
-        text-align: center;
-      }
-
-      .movieInfoUl {
-        list-style-type: none;
-        .liEl {
-          @include mixin.textStyle(
-            globalVar.$mutedColor,
-            globalVar.$smallStroke,
-            inherit,
-            bold
-          );
-        }
-        .type {
-          font-style: italic;
-        }
-      }
-    }
-  }
-}
-
-.miniCard:hover {
-  background-color: hsl(123 54% 85% / 1);
 }
 
 .backArrowContainer {
@@ -100,11 +45,11 @@ html {
     height: 200px; /* Ange höjd för hero-sektionen */
     width: globalVar.$heroItemsWidth;
     @include mixin.flexCenter(row, space-between, normal);
-    border-radius: 20px;
+    border-radius: globalVar.$borderRadius;
     overflow: hidden;
     margin: 1rem 1rem 0 1rem;
     border-bottom: 2px solid black;
-    padding: 1rem;
+    padding: globalVar.$paddingDefault;
     h1 {
       @include mixin.textStyle(inherit, globalVar.$stroke, 2rem, normal);
 
@@ -161,7 +106,7 @@ html {
     width: globalVar.$heroItemsWidth;
     position: absolute; /* Behåll positionen inom `titleDiv` */
     top: 160px;
-    padding: 10px; /* Valfri padding för layout */
+    padding: globalVar.$gap; /* Valfri padding för layout */
     h3 {
       z-index: 2;
       @include mixin.textStyle(
@@ -197,7 +142,7 @@ html {
   }
 }
 
-@media (max-width: 522px) {
+@include mixin.respond-to(globalVar.$breakpoint-mobile) {
   .viewContainer {
     width: 310px;
     grid-template-columns: repeat(1, 1fr);

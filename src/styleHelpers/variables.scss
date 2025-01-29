@@ -2,6 +2,9 @@ $searchBarHeight: 30px;
 $searchBarInnerRadius: 2.5px;
 $small: 2px;
 $heroItemsWidth: 461px;
+$borderRadius: 20px;
+$paddingDefault: 1rem;
+$gap: 10px;
 $thickStroke:
   -4px -4px 4px black,
   4px -4px 4px black,
@@ -39,3 +42,4 @@ $textColor: white;
 $highlightColor: hsl(65, 98%, 77%);
 $mutedColor: hsl(441, 11%, 42%);
 $overlayColor: hsl(0deg 0% 0% / 53%);
+$breakpoint-mobile: 522px;

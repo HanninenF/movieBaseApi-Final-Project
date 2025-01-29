@@ -1,0 +1,8 @@
+@use "../../../styleHelpers/mixin.scss" as mixin;
+@use "../../../styleHelpers/variables.scss" as globalVar;
+
+.movieInfoDiv {
+  @include mixin.flexCenter(column, normal, flex-start);
+  align-self: end;
+  padding-left: globalVar.$gap;
+}

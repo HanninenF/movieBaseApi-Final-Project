@@ -42,3 +42,16 @@
     padding: $padding;
   }
 }
+
+@mixin respond-to($breakpoint) {
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin hoverEffect($color, $duration: 0.2s) {
+  transition: background-color $duration;
+  &:hover {
+    background-color: $color;
+  }
+}

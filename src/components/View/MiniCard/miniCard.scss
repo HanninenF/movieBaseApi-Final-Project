@@ -1,0 +1,23 @@
+@use "../../../styleHelpers/mixin.scss" as mixin;
+@use "../../../styleHelpers/variables.scss" as globalVar;
+.miniCard {
+  appearance: none;
+  max-width: 311px;
+  display: flex;
+  /* height: 1px; */
+  /* border: 1px solid #ddd; */
+  border: none;
+  border-bottom: 2px solid black;
+  /* border-radius: 5px; */
+  border-radius: 0;
+  padding: globalVar.$gap;
+  /* background-color: white; */
+  background-color: inherit;
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+.miniCard:hover {
+  @include mixin.hoverEffect(hsl(123 54% 85% / 1));
+}

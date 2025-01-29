@@ -1,0 +1,13 @@
+@use "../../../styleHelpers/mixin.scss" as mixin;
+@use "../../../styleHelpers/variables.scss" as globalVar;
+.liEl {
+  @include mixin.textStyle(
+    globalVar.$mutedColor,
+    globalVar.$smallStroke,
+    inherit,
+    bold
+  );
+}
+.type {
+  font-style: italic;
+}
