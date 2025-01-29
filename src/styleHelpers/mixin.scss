@@ -1,0 +1,44 @@
+@mixin searchBar($width, $height, $padding-left) {
+  width: $width;
+  height: $height;
+  font-size: 1rem;
+  border: none;
+  background-color: buttonface;
+  padding-left: $padding-left;
+  min-width: 50px;
+}
+
+@mixin flexCenter(
+  $direction: row,
+  $justifyContent: center,
+  $alignItems: center
+) {
+  display: flex;
+  justify-content: $justifyContent;
+  flex-direction: $direction;
+  align-items: $alignItems;
+}
+
+@mixin textStyle(
+  $color,
+  $shadow,
+  $size: null,
+  $weight: null,
+  $style: null,
+  $padding: null
+) {
+  color: $color;
+  text-shadow: $shadow;
+  @if $size {
+    font-size: $size;
+  }
+  @if $weight {
+    font-weight: $weight;
+  }
+  @if $style {
+    font-style: $style;
+  }
+  @if $padding {
+    padding: $padding;
+  }
+}

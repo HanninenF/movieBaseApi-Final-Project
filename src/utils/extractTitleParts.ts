@@ -6,5 +6,9 @@ export const extractTitleParts = (
 
     return { firstPart: `${beforeColon}:`, secondPart: afterColon.trim() };
   }
+  if (textContent.includes("-")) {
+    const [beforeHyphen, afterHyphen] = textContent.split("-");
+    return { firstPart: `${beforeHyphen}-`, secondPart: afterHyphen.trim() };
+  }
   return { firstPart: textContent, secondPart: "" };
 };

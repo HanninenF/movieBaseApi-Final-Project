@@ -7,7 +7,7 @@ export const createMovieInfoListItem = (
   key: string
 ) => {
   const listItemElement = Utils.createCustomElement(
-    ["liEl", Utils.getSanitizedString(movie.Title)],
+    ["liEl", key, Utils.getSanitizedString(movie.Title)],
     "li",
     movie,
     `List Element with additional movie info: ${key}`,

@@ -2,3 +2,40 @@ $searchBarHeight: 30px;
 $searchBarInnerRadius: 2.5px;
 $small: 2px;
 $heroItemsWidth: 461px;
+$thickStroke:
+  -4px -4px 4px black,
+  4px -4px 4px black,
+  -4px 4px 4px black,
+  4px 4px 4px black,
+  -6px -6px 6px black,
+  6px -6px 6px black,
+  -6px 6px 6px black,
+  6px 6px 6px black,
+  -8px -8px 8px black,
+  8px -8px 8px black,
+  -8px 8px 8px black,
+  8px 8px 8px black,
+  0px 0px 20px black;
+$stroke:
+  -2px -2px 2px black,
+  2px -2px 2px black,
+  -2px 2px 2px black,
+  2px 2px 2px black,
+  -3px -3px 3px black,
+  3px -3px 3px black,
+  -3px 3px 3px black,
+  3px 3px 3px black,
+  0px 0px 15px black;
+
+$smallStroke:
+  -0.1px -0.1px 0.1px hsl(81 20% 50% / 1),
+  0.1px -0.1px 0.1px hsl(81 20% 50% / 1),
+  -0.1px 0.1px 0.1px hsl(81 20% 50% / 1),
+  0.1px 0.1px 0.1px hsl(81 20% 50% / 1);
+
+$backgroundColor: darkolivegreen;
+$cardBackgroundColor: floralwhite;
+$textColor: white;
+$highlightColor: hsl(65, 98%, 77%);
+$mutedColor: hsl(441, 11%, 42%);
+$overlayColor: hsl(0deg 0% 0% / 53%);
