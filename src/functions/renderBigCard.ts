@@ -28,8 +28,6 @@ export const renderBigCard = (currentView: AllTypes.Movie) => {
 
   //title, hero, runtime
   const title = View.createTitle(currentView);
-  console.log("elements and splitTitleParts: ", title);
-  console.log("title.element.id= ", title.titleElement.id);
   if (title.subtitleElement) {
     const titleTextH1 = title.splitTitleParts.firstPart;
     const titleTextSpan = title.splitTitleParts.secondPart;
@@ -41,7 +39,6 @@ export const renderBigCard = (currentView: AllTypes.Movie) => {
 
     titleDiv.appendChild(titleH1Element);
 
-    console.log("H1", titleH1Element);
     titleH1Element.appendChild(titleSpanElement);
   } else {
     const titleTextH1 = title.splitTitleParts.firstPart;
@@ -99,6 +96,7 @@ export const renderBigCard = (currentView: AllTypes.Movie) => {
         movieInfoListData,
         key
       );
+      listItemElement.id += `-${key}`;
       movieUl.appendChild(listItemElement);
     }
   }

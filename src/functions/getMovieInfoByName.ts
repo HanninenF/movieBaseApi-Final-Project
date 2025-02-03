@@ -5,7 +5,7 @@ export const getMovieInfoByName = async (
   title: string
 ): Promise<AllTypes.Root> => {
   const movieUrl: string = baseUrl + "s=" + title;
-  console.log(movieUrl);
+  movieUrl;
   const response = await fetch(movieUrl);
   const data = (await response.json()) as AllTypes.Root;
 

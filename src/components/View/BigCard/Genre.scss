@@ -1,0 +1,14 @@
+@use "../../../styleHelpers/mixin.scss" as mixin;
+@use "../../../styleHelpers/variables.scss" as globalVar;
+
+.genre {
+  z-index: 2;
+  @include mixin.textStyle(
+    inherit,
+    globalVar.$thickStroke,
+    1.2rem,
+    normal,
+    normal,
+    0
+  );
+}

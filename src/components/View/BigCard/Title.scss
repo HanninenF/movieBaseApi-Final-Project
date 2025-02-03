@@ -1,0 +1,20 @@
+@use "../../../styleHelpers/mixin.scss" as mixin;
+@use "../../../styleHelpers/variables.scss" as globalVar;
+
+.title {
+  position: relative;
+  z-index: 2; /* Lägg texten ovanför overlay */
+  @include mixin.textStyle(inherit, globalVar.$stroke, 2rem, normal);
+
+  #titleSpanElementWithColonSplit {
+    display: block;
+    @include mixin.textStyle(
+      globalVar.$highlightColor,
+      globalVar.$thickStroke,
+      1.5rem,
+      normal,
+      italic,
+      8px 0 0 15px
+    );
+  }
+}

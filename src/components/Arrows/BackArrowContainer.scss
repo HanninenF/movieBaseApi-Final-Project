@@ -1,0 +1,5 @@
+@use "../../styleHelpers/mixin.scss" as mixin;
+.backArrowContainer {
+  padding: 1.5rem 0 0 0;
+  @include mixin.flexCenter(row, space-around, normal);
+}

@@ -1,0 +1,14 @@
+@use "../../../styleHelpers/mixin.scss" as mixin;
+@use "../../../styleHelpers/variables.scss" as globalVar;
+
+.released {
+  z-index: 2;
+  @include mixin.textStyle(
+    inherit,
+    globalVar.$stroke,
+    1.5rem,
+    normal,
+    normal,
+    0
+  );
+}

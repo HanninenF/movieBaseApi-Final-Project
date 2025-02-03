@@ -1,1 +1,1 @@
-export * from "../BigCard/createHeroContainer";
+export * from "./createHeroContainer";

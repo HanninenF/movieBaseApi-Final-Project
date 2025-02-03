@@ -2,7 +2,6 @@ import { AllTypes } from "../types/types";
 import { AllDomEl } from "../utils/AllDomEl";
 import * as View from "../components/View/MiniCard/miniCardIndex/miniCardIndex";
 export const renderMiniCard = (currentView: AllTypes.Search[]) => {
-  console.log("AllDomEl.viewContainer= ", AllDomEl.viewContainer);
   if (!AllDomEl.viewContainer) {
     console.error("AllDomEl.viewContainer element not found in DOM");
     return;
@@ -10,13 +9,9 @@ export const renderMiniCard = (currentView: AllTypes.Search[]) => {
 
   //rensa all content i view
   AllDomEl.viewContainer.innerHTML = "";
-  console.log("clean viewContainer");
-
   //appenda alla filmer i State.currentView
   currentView.forEach((movie) => {
     if (!("Runtime" in movie)) {
-      console.log(movie.Title);
-
       //TODO: gör samma på BigCard
       //miniCard
       AllDomEl.viewContainer.appendChild(View.createMiniCard(movie));
@@ -55,10 +50,10 @@ export const renderMiniCard = (currentView: AllTypes.Search[]) => {
           movieInfoListData,
           key
         );
+        listItemElement.id += `-${key}`;
         movieUl.appendChild(listItemElement);
       }
     } else {
-      console.log(`${movie.Runtime} is of type Movie`);
     }
   });
 };

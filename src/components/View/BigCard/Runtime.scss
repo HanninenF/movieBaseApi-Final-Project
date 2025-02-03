@@ -1,0 +1,15 @@
+@use "../../../styleHelpers/mixin.scss" as mixin;
+@use "../../../styleHelpers/variables.scss" as globalVar;
+
+.runtime {
+  position: relative;
+  z-index: 2; /* Lägg texten ovanför overlay */
+  @include mixin.textStyle(
+    inherit,
+    globalVar.$stroke,
+    1.5rem,
+    normal,
+    normal,
+    8px 0 0 15px
+  );
+}

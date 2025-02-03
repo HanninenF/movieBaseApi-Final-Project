@@ -41,6 +41,11 @@ export namespace AllTypes {
     Response: string;
   };
 
+  /*   export type ViewState = {
+    type: "Search" | "Movie";
+    data: Search[];
+  }; */
+
   export type Rating = {
     Source: string;
     Value: string;
@@ -54,6 +59,7 @@ export namespace AllTypes {
     Actors?: string;
     BoxOffice?: string;
     Rated?: string;
+    imdbID?: string;
   };
 
   export type MovieInfoClasses = {

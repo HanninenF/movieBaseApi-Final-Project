@@ -8,7 +8,7 @@ export const getMovieInfoByNameAndTypeMovie = async (
   const response = await fetch(movieUrl);
   const data = (await response.json()) as AllTypes.Root;
 
-  console.log("movieUrl= ", movieUrl);
+  "movieUrl= ", movieUrl;
 
   return data;
 };

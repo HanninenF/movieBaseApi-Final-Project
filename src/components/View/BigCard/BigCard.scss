@@ -1,0 +1,8 @@
+@use "../../../styleHelpers/mixin.scss" as mixin;
+@use "../../../styleHelpers/variables.scss" as globalVar;
+
+.bigCard {
+  @include mixin.flexCenter(column, normal);
+  width: 621px;
+  position: relative; /*Gör att barn kan använda positioneringssystem */
+}

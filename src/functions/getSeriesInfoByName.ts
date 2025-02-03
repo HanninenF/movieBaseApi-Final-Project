@@ -6,7 +6,5 @@ export const getSeriesInfoByName = async (name: string) => {
   const response = await fetch(seriesUrl);
   const data = (await response.json()) as AllTypes.Root;
 
-  console.log("seriesUrl= ", seriesUrl);
-
   return data.Response;
 };

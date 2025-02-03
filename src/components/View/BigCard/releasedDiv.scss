@@ -1,0 +1,10 @@
+@use "../../../styleHelpers/mixin.scss" as mixin;
+@use "../../../styleHelpers/variables.scss" as globalVar;
+
+.releasedDiv {
+  @include mixin.flexCenter(row, space-between, flex-end);
+  width: globalVar.$heroItemsWidth;
+  position: absolute; /* Behåll positionen inom `titleDiv` */
+  top: 160px;
+  padding: globalVar.$gap; /* Valfri padding för layout */
+}

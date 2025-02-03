@@ -1,0 +1,5 @@
+@use "../../../styleHelpers/variables.scss" as globalVar;
+.infoUl {
+  list-style-type: none;
+  padding: globalVar.$gap;
+}

@@ -6,13 +6,11 @@ import * as State from "./state/stateIndex/stateIndex";
 import { apiKey } from "../src/keys/apiKey";
 import * as Searchbar from "./components/SearchBar/searchBarIndex/searchBarIndex";
 import * as View from "./components/View/viewIndex/viewIndex";
-import * as BackArrow from "./components/BackArrow/backArrowIndex/backArrowIndex";
+import * as Arrows from "./components/Arrows/ArrowsIndex/arrowsIndex";
 import { AllDomEl } from "./utils/AllDomEl";
 import { AllTypes } from "./types/types";
 
 export const baseUrl: string = `http://www.omdbapi.com/?apikey=${apiKey}&`;
-
-console.log(await Functions.getMovieInfoByName("lethal"));
 
 export const main = document.querySelector(".main") as HTMLElement;
 
@@ -59,15 +57,20 @@ searchBar.appendChild(Searchbar.createSearchButton());
 /* <!-- backArrow --> */
 //TODO: göm backArrow här
 
-main.appendChild(BackArrow.createBackArrowContainer());
+main.appendChild(Arrows.createBackArrowContainer());
 const backArrowContainer = document.querySelector(
   ".backArrowContainer"
 ) as HTMLDivElement;
-backArrowContainer.appendChild(BackArrow.createBackArrow());
+backArrowContainer.appendChild(Arrows.createBackArrow());
 
-const backArrow = document.querySelector(".backArrow") as HTMLDivElement;
-console.log("backArrow= ", backArrow);
+const backArrow = document.querySelector(".backArrow") as SVGElement;
 backArrowContainer.appendChild(backArrow);
+
+/* <!-- forwardArrow -->  */
+
+backArrowContainer.appendChild(Arrows.createForwardArrow());
+
+const forwardArrow = document.querySelector(".forwardArrow") as SVGElement;
 
 /* <!-- viewContainer --> */
 main.appendChild(View.createViewContainer());
@@ -77,50 +80,46 @@ main.appendChild(View.createViewContainer());
 //////////////////////////////////
 AllDomEl.initDomElements();
 /* <!-- EventListener Sökfält Form--> */
-console.log("entered document.addEventListener");
 if (searchBar && AllDomEl.dropdown && AllDomEl.searchInput) {
   searchBar.addEventListener("submit", async (e) => {
-    State.appState.currentView = [];
     e.preventDefault();
-    console.log("entered searchBar.addEventListener");
+
+    if (State.appState.currentView.length > 0) {
+      State.appState.previousViews.push([...State.appState.currentView]);
+      /*  State.appState.lastSearch = [...State.appState.currentView]; // 🔥 Uppdatera `lastSearch` */
+    }
+
+    // 🔥 Nollställ `currentView` och `futureViews` eftersom vi startar en ny sökning
+    State.appState.currentView = [];
+    State.appState.futureViews = [];
+
     const dropdownValue = AllDomEl.dropdown!.value as AllTypes.Category;
-    console.log("categoryDropdown=", dropdownValue);
     const searchInputValue = Utils.getUrlParametersFromWord(
       AllDomEl.searchInput.value
     ) as string;
-
-    console.log("searchInputValue= ", searchInputValue);
 
     if (dropdownValue === "All") {
       const movieInfo = await Functions.getMovieInfoByName(searchInputValue);
 
       State.setAllMovies(movieInfo.Search);
 
-      console.log("state movies from main= ", State.appState.allMovies);
-
       State.setCurrentView(movieInfo.Search);
-
-      console.log(movieInfo);
-
+      /* State.setPreviousView(movieInfo.Search); */
       Functions.renderMiniCard(State.appState.currentView);
-
-      console.log("rendern gick bra");
+      console.log("All states: ", State.appState);
     }
     if (dropdownValue === "Titles") {
       //TODO:
       const movieInfo = await Functions.getMovieInfoByTitle(searchInputValue);
-      console.log(movieInfo);
     }
     if (dropdownValue === "Movies") {
       //TODO_
       const movieInfo =
         await Functions.getMovieInfoByNameAndTypeMovie(searchInputValue);
-      console.log(movieInfo);
     }
     if (dropdownValue === "Series") {
       //TODO:
       const seriesInfo = await Functions.getSeriesInfoByName(searchInputValue);
-      console.log(seriesInfo);
     }
     AllDomEl.searchInput.value = "";
     /*  AllDomEl.dropdown.value = "default"; */
@@ -135,31 +134,101 @@ if (searchBar && AllDomEl.dropdown && AllDomEl.searchInput) {
     const target = e.target as HTMLElement;
     const miniCard = target.closest("button.miniCard") as HTMLButtonElement;
 
-    console.log("button= ", miniCard);
-
-    //hämta id från html-elementet
+    // Hämta id från miniCard (om det existerar)
     const movieId = miniCard?.getAttribute("data-id");
-    console.log("knapp klickad, data-id= ", movieId);
-    //TODO: fetcha ny data
-    //TODO: currentView
-
-    State.appState.currentView = State.appState.allMovies.filter((movie) =>
-      movie.imdbID === movieId ? movie : null
-    );
-
-    console.log(
-      "State.appstate.currentView in viewContainer.eventlistener= ",
-      State.appState.currentView
-    );
 
     if (movieId) {
-      const detailedInfo = await Functions.getDetailedInfoById(movieId);
-      console.log(detailedInfo);
+      // ✅ Spara senaste sökningen i `lastSearch` innan vi navigerar till en film
+      if (State.appState.currentView.length > 0) {
+        const lastSearch = State.appState.futureViews;
+        if (lastSearch) {
+          State.appState.lastSearch = lastSearch;
+          State.appState.futureViews = [];
+        }
+        State.appState.previousViews.push(State.appState.currentView);
 
-      //uppdatera state currentView
+        console.log("after push bigCard");
+      }
+
+      // 🔥 Uppdatera currentView med den valda filmen
+      State.appState.currentView = State.appState.AllMovies.filter((movie) =>
+        movie.imdbID === movieId ? movie : null
+      );
+
+      const detailedInfo = await Functions.getDetailedInfoById(movieId);
       State.setCurrentViewById(detailedInfo);
 
       Functions.renderBigCard(State.appState.currentView[0] as AllTypes.Movie);
+
+      console.log("🔹 Clicked movie, updated State:", State.appState);
     }
   });
 }
+
+if (backArrow) {
+  backArrow.addEventListener("click", () => {
+    if (State.appState.lastSearch.length > 0) {
+      State.appState.futureViews = State.appState.lastSearch;
+      const prevView = State.appState.previousViews.pop();
+      if (prevView) {
+        State.appState.currentView = prevView;
+        Functions.renderMiniCard(State.appState.currentView);
+
+        console.log("All states: ", State.appState);
+      }
+      /*  State.appState.currentView; */
+    } else if (State.appState.previousViews.length > 0) {
+      // 🔥 Spara nuvarande vy i futureViews innan vi byter
+      if (State.appState.currentView.length > 0) {
+        State.appState.futureViews.push([...State.appState.currentView]);
+        const prevView = State.appState.previousViews.pop();
+        if (prevView) {
+          State.appState.currentView = prevView;
+        }
+      }
+
+      Functions.renderMiniCard(State.appState.currentView);
+
+      console.log("All states: ", State.appState);
+    } else {
+      console.warn("⚠️ No valid previous view available.");
+    }
+  });
+}
+
+/* if (forwardArrow) {
+  forwardArrow.addEventListener("click", () => {
+    if (State.appState.futureViews.length > 0) {
+      // 🔥 Hämta nästa vy från futureViews
+      const nextViewObj = State.appState.futureViews.pop();
+
+      if (nextViewObj && nextViewObj.data.length > 0) {
+        // 🔥 Uppdatera currentView med nästa vy
+        State.appState.currentView = nextViewObj.data;
+
+        if (nextViewObj.type === "Search") {
+          // ✅ Om vi går framåt till en sökning, säkerställ att `lastSearch` uppdateras
+          State.appState.lastSearch = [...nextViewObj.data];
+
+          Functions.renderMiniCard(State.appState.currentView);
+        } else if (nextViewObj.type === "Movie") {
+          Functions.renderBigCard(
+            State.appState.currentView[0] as AllTypes.Movie
+          );
+        }
+
+        console.log(
+          "🔹 Forward: Navigerade till nästa vy:",
+          State.appState.currentView
+        );
+        console.log("All states: ", State.appState);
+      } else {
+        console.warn("⚠️ No valid forward view available.");
+      }
+    } else {
+      console.warn("⚠️ No forward view available, staying on current view.");
+    }
+  });
+} */
+
+//innan currentview ändras ska den läggas till i

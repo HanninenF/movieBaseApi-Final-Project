@@ -1,0 +1,12 @@
+@use "../../styleHelpers/mixin.scss" as mixin;
+@use "../../styleHelpers/variables.scss" as globalVar;
+.viewContainer {
+  border-radius: globalVar.$borderRadius;
+  align-self: center;
+  background-color: globalVar.$cardBackgroundColor;
+  /* margin: 2rem 0 0 9rem; */
+  display: grid;
+  width: 620px;
+  grid-template-columns: repeat(2, 1fr);
+  /* gap: 1rem; */
+}
