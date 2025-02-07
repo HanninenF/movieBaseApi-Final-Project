@@ -1,4 +1,3 @@
-````md
 # 🎬 MovieBaseAPI – Search and Explore Movies with OMDb API
 
 MovieBaseAPI is a web application where users can search for **movies, series, and titles** using the **OMDb API**. The results are displayed in a **card view**, and users can click on a movie to see its **detailed information**.
@@ -8,10 +7,9 @@ MovieBaseAPI is a web application where users can search for **movies, series, a
 ### 1. Clone the repository
 
 ```sh
-git clone https://github.com/your-github-username/movieBaseApi-slutprojekt.git
-cd movieBaseApi-slutprojekt
+git clone https://github.com/HanninenF/movieBaseApi-Final-Project.git
+cd movieBaseApi-Final-Project
 ```
-````
 
 ### 2. Install dependencies
 
@@ -79,7 +77,7 @@ The project uses the **OMDb API** to fetch movie data.
 ## 🔗 Contact & LinkedIn
 
 Developed by **Fredrik Hänninen**  
-📎 [LinkedIn Profile](https://www.linkedin.com/in/your-profile-link/)
+📎 [LinkedIn Profile](https://www.linkedin.com/in/fredrik-h%C3%A4nninen-0240a2327/)
 
 ---
 
@@ -92,16 +90,3 @@ Developed by **Fredrik Hänninen**
 ---
 
 🎬 **MovieBaseAPI** is a well-structured and scalable project, focusing on **user experience and code quality**! 🚀
-
-```
-
----
-
-### 🔹 **Why this README is great:**
-✅ **Professional and well-structured** – Clear, concise, and easy to follow.
-✅ **Covers all requirements** – Installation, API usage, technologies, contact info.
-✅ **Includes command examples** – Easy setup for new users.
-✅ **Additional info** – `.gitignore`, DRY principle, error handling.
-
-📌 **Let me know if you'd like any adjustments!** 😊
-```
