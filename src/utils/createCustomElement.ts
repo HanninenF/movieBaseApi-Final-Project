@@ -27,7 +27,11 @@ export const createCustomElement = <T extends keyof HTMLElementTagNameMap>(
       element.setAttribute("aria-label", `${ariaLabel} ${movieInfo.Title}`);
       element.type = "button";
     } else {
-      element.id = `${className[0]}-${movieInfo.imdbID}`;
+      if (movieInfo) {
+        element.id = `${className[0]}-${movieInfo.imdbID}`;
+      } else {
+        element.id = `${className[0]}`;
+      }
       if (ariaLabel !== undefined) {
         element.setAttribute("aria-label", `${ariaLabel}`);
       }

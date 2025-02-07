@@ -1,0 +1,14 @@
+.forwardArrowWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px; /* Ökar klickytan */
+  height: 50px;
+  margin-left: 80px;
+  margin-right: clamp(1.875rem, 9vw, 8.175rem);
+  /* padding-right: 40px; */
+  cursor: pointer;
+  .forwardArrow {
+    fill: black;
+  }
+}

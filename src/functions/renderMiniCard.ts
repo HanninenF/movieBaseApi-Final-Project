@@ -1,16 +1,36 @@
 import { AllTypes } from "../types/types";
 import { AllDomEl } from "../utils/AllDomEl";
 import * as View from "../components/View/MiniCard/miniCardIndex/miniCardIndex";
-export const renderMiniCard = (currentView: AllTypes.Search[]) => {
+export const renderMiniCard = (
+  currentView: AllTypes.Search[] | AllTypes.Movie
+) => {
   if (!AllDomEl.viewContainer) {
     console.error("AllDomEl.viewContainer element not found in DOM");
     return;
   }
 
+  const moviesArray: AllTypes.Search[] = Array.isArray(currentView)
+    ? currentView.map((movie) => ({
+        Title: movie.Title,
+        Year: movie.Year,
+        imdbID: movie.imdbID,
+        Type: movie.Type,
+        Poster: movie.Poster,
+      }))
+    : [
+        {
+          Title: currentView.Title,
+          Year: currentView.Year,
+          imdbID: currentView.imdbID,
+          Type: currentView.Type,
+          Poster: currentView.Poster,
+        },
+      ];
+
   //rensa all content i view
   AllDomEl.viewContainer.innerHTML = "";
   //appenda alla filmer i State.currentView
-  currentView.forEach((movie) => {
+  moviesArray.forEach((movie) => {
     if (!("Runtime" in movie)) {
       //TODO: gör samma på BigCard
       //miniCard

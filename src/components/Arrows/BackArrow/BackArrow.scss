@@ -1,3 +1,14 @@
-.backArrow {
-  fill: black;
+.backArrowWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px; /* Ökar klickytan */
+  height: 50px;
+  margin-right: 80px;
+  margin-left: clamp(1.875rem, 9vw, 8.175rem);
+  /* padding-left: 40px; */
+  cursor: pointer;
+  .backArrow {
+    fill: black;
+  }
 }

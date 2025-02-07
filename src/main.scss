@@ -13,6 +13,7 @@
 }
 
 html {
+  overflow-y: scroll;
   background-color: globalVar.$backgroundColor;
   color: globalVar.$textColor;
 }
@@ -20,9 +21,47 @@ html {
   @include mixin.flexCenter(column, center, normal);
 }
 
-@include mixin.respond-to(globalVar.$breakpoint-mobile) {
+@include mixin.respond-to-max(globalVar.$breakpoint-mobile) {
   .viewContainer {
-    width: 310px;
     grid-template-columns: repeat(1, 1fr);
   }
+
+  .viewContainerBigCard {
+    grid-template-columns: repeat(1, 1fr);
+    width: 315px /* globalVar.$cardWidth/2 */;
+  }
+
+  .bigCard {
+    width: 315px /* globalVar.$cardWidth/2 */ /* + 20px */;
+
+    .titleDiv {
+      padding: 0.5rem 1rem 0.5rem 1rem;
+      width: 315px /* globalVar.$cardWidth/2 */;
+      height: globalVar.$heroItemsHeight/2 + 15px;
+    }
+
+    .releasedDiv {
+      padding: 10px 1rem 10px 1rem;
+      width: 315px /* globalVar.$cardWidth/2 */;
+      top: 97.5px;
+      .genre {
+        font-size: 0.8em;
+      }
+    }
+
+    .poster {
+      height: 181px;
+    }
+  }
 }
+
+@include mixin.respond-to-min(globalVar.$breakpoint-desktop) {
+  .backArrowWrapper {
+    margin-left: clamp(1.875rem, 9.5vw, 10.375rem);
+  }
+  .forwardArrowWrapper {
+    margin-right: clamp(1.875rem, 9.5vw, 10.375rem);
+  }
+}
+
+/* //TODO: fixa mediaqueri till bigcard */

@@ -1,5 +1,9 @@
 .poster {
   display: block;
 
-  height: 270px;
+  max-height: 270px;
+  max-width: 185px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
 }

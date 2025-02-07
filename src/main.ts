@@ -61,14 +61,24 @@ main.appendChild(Arrows.createBackArrowContainer());
 const backArrowContainer = document.querySelector(
   ".backArrowContainer"
 ) as HTMLDivElement;
-backArrowContainer.appendChild(Arrows.createBackArrow());
+backArrowContainer.append(
+  Utils.createCustomElement(["backArrowWrapper", "arrowWrapper"], "div"),
+  Utils.createCustomElement(["forwardArrowWrapper", "arrowWrapper"], "div")
+);
+const backArrowWrapper = document.querySelector(
+  ".backArrowWrapper"
+) as HTMLDivElement;
+const forwardArrowWrapper = document.querySelector(
+  ".forwardArrowWrapper"
+) as HTMLDivElement;
+
+backArrowWrapper.appendChild(Arrows.createBackArrow());
 
 const backArrow = document.querySelector(".backArrow") as SVGElement;
-backArrowContainer.appendChild(backArrow);
 
 /* <!-- forwardArrow -->  */
 
-backArrowContainer.appendChild(Arrows.createForwardArrow());
+forwardArrowWrapper.appendChild(Arrows.createForwardArrow());
 
 const forwardArrow = document.querySelector(".forwardArrow") as SVGElement;
 
@@ -85,7 +95,11 @@ if (searchBar && AllDomEl.dropdown && AllDomEl.searchInput) {
     e.preventDefault();
 
     if (State.appState.currentView.length > 0) {
+      if (State.appState.previousViews.length > 0) {
+        backArrow.setAttribute("display", "block");
+      }
       State.appState.previousViews.push([...State.appState.currentView]);
+      /* backArrow.setAttribute("display", "block"); */
       /*  State.appState.lastSearch = [...State.appState.currentView]; // 🔥 Uppdatera `lastSearch` */
     }
 
@@ -101,25 +115,57 @@ if (searchBar && AllDomEl.dropdown && AllDomEl.searchInput) {
     if (dropdownValue === "All") {
       const movieInfo = await Functions.getMovieInfoByName(searchInputValue);
 
-      State.setAllMovies(movieInfo.Search);
+      if (movieInfo && movieInfo.Search) {
+        console.log("movieInfo och movieInfo search är inte null");
+        State.setAllMovies(movieInfo.Search);
 
-      State.setCurrentView(movieInfo.Search);
-      /* State.setPreviousView(movieInfo.Search); */
-      Functions.renderMiniCard(State.appState.currentView);
-      console.log("All states: ", State.appState);
+        State.setCurrentView(movieInfo.Search);
+        /* State.setPreviousView(movieInfo.Search); */
+        Functions.renderMiniCard(State.appState.currentView);
+        console.log("All states: ", State.appState);
+      }
     }
     if (dropdownValue === "Titles") {
       //TODO:
       const movieInfo = await Functions.getMovieInfoByTitle(searchInputValue);
+      console.log(movieInfo);
+
+      if (movieInfo) {
+        State.setAllMoviesFromTitles(movieInfo);
+
+        State.setCurrentViewFromTitle(movieInfo);
+        /* State.setPreviousView(movieInfo.Search); */
+        Functions.renderMiniCard(State.appState.currentView);
+        console.log("All states: ", State.appState);
+      }
     }
     if (dropdownValue === "Movies") {
       //TODO_
       const movieInfo =
         await Functions.getMovieInfoByNameAndTypeMovie(searchInputValue);
+
+      if (movieInfo && movieInfo.Search) {
+        State.setAllMovies(movieInfo.Search);
+
+        State.setCurrentView(movieInfo.Search);
+        /* State.setPreviousView(movieInfo.Search); */
+        Functions.renderMiniCard(State.appState.currentView);
+        console.log("All states: ", State.appState);
+        /* console.log(JSON.stringify(State.appState.currentView, null, 2)); */
+      }
     }
     if (dropdownValue === "Series") {
       //TODO:
       const seriesInfo = await Functions.getSeriesInfoByName(searchInputValue);
+
+      if (seriesInfo && seriesInfo.Search) {
+        State.setAllMovies(seriesInfo.Search);
+
+        State.setCurrentView(seriesInfo.Search);
+        /* State.setPreviousView(movieInfo.Search); */
+        Functions.renderMiniCard(State.appState.currentView);
+        console.log("All states: ", State.appState);
+      }
     }
     AllDomEl.searchInput.value = "";
     /*  AllDomEl.dropdown.value = "default"; */
@@ -145,90 +191,121 @@ if (searchBar && AllDomEl.dropdown && AllDomEl.searchInput) {
           State.appState.lastSearch = lastSearch;
           State.appState.futureViews = [];
         }
-        State.appState.previousViews.push(State.appState.currentView);
+
+        // ✅ Spara föregående vy INNAN `currentView` ändras!
+        State.appState.previousViews.push([...State.appState.currentView]); // Kopiera arrayen
+
+        if (State.appState.previousViews.length > 0) {
+          console.log("display block");
+          backArrow.setAttribute("display", "block");
+        }
 
         console.log("after push bigCard");
       }
 
-      // 🔥 Uppdatera currentView med den valda filmen
-      State.appState.currentView = State.appState.AllMovies.filter((movie) =>
-        movie.imdbID === movieId ? movie : null
+      const existingMovie = State.appState.AllMovies.find(
+        (movie) => movie.imdbID === movieId
       );
 
-      const detailedInfo = await Functions.getDetailedInfoById(movieId);
-      State.setCurrentViewById(detailedInfo);
+      console.log("existingMovie:", existingMovie);
 
-      Functions.renderBigCard(State.appState.currentView[0] as AllTypes.Movie);
+      if (existingMovie && "Runtime" in existingMovie) {
+        console.log("✅ Detailed info already available, skipping fetch.");
+        State.appState.currentView = [existingMovie]; // Direktuppdatering med befintlig film
+      } else {
+        console.log("❌ Runtime not found, fetching detailed info.");
+        const detailedInfo = await Functions.getDetailedInfoById(movieId);
+        console.log("Fetched detailedInfoById", detailedInfo);
 
-      console.log("🔹 Clicked movie, updated State:", State.appState);
-    }
-  });
-}
+        if (detailedInfo) {
+          // ✅ Uppdatera `AllMovies` med detaljerad info
+          State.appState.AllMovies = State.appState.AllMovies.map((movie) =>
+            movie.imdbID === movieId ? detailedInfo : movie
+          );
 
-if (backArrow) {
-  backArrow.addEventListener("click", () => {
-    if (State.appState.lastSearch.length > 0) {
-      State.appState.futureViews = State.appState.lastSearch;
-      const prevView = State.appState.previousViews.pop();
-      if (prevView) {
-        State.appState.currentView = prevView;
-        Functions.renderMiniCard(State.appState.currentView);
+          // ✅ Uppdatera `currentView` med den detaljerade filmen
+          State.appState.currentView = [detailedInfo];
 
-        console.log("All states: ", State.appState);
-      }
-      /*  State.appState.currentView; */
-    } else if (State.appState.previousViews.length > 0) {
-      // 🔥 Spara nuvarande vy i futureViews innan vi byter
-      if (State.appState.currentView.length > 0) {
-        State.appState.futureViews.push([...State.appState.currentView]);
-        const prevView = State.appState.previousViews.pop();
-        if (prevView) {
-          State.appState.currentView = prevView;
-        }
-      }
-
-      Functions.renderMiniCard(State.appState.currentView);
-
-      console.log("All states: ", State.appState);
-    } else {
-      console.warn("⚠️ No valid previous view available.");
-    }
-  });
-}
-
-/* if (forwardArrow) {
-  forwardArrow.addEventListener("click", () => {
-    if (State.appState.futureViews.length > 0) {
-      // 🔥 Hämta nästa vy från futureViews
-      const nextViewObj = State.appState.futureViews.pop();
-
-      if (nextViewObj && nextViewObj.data.length > 0) {
-        // 🔥 Uppdatera currentView med nästa vy
-        State.appState.currentView = nextViewObj.data;
-
-        if (nextViewObj.type === "Search") {
-          // ✅ Om vi går framåt till en sökning, säkerställ att `lastSearch` uppdateras
-          State.appState.lastSearch = [...nextViewObj.data];
-
-          Functions.renderMiniCard(State.appState.currentView);
-        } else if (nextViewObj.type === "Movie") {
+          // ✅ Rendera den uppdaterade `currentView`
+          AllDomEl.viewContainer.classList.add("viewContainerBigCard");
           Functions.renderBigCard(
             State.appState.currentView[0] as AllTypes.Movie
           );
-        }
 
-        console.log(
-          "🔹 Forward: Navigerade till nästa vy:",
-          State.appState.currentView
-        );
-        console.log("All states: ", State.appState);
-      } else {
-        console.warn("⚠️ No valid forward view available.");
+          console.log("🔹 Clicked movie, updated State:", State.appState);
+        }
       }
+
+      const previousMovie = State.appState.previousViews[0]?.[0];
+      console.log("previousMovie:", previousMovie);
+    }
+  });
+}
+
+if (forwardArrowWrapper) {
+  backArrowWrapper.addEventListener("click", () => {
+    if (State.appState.previousViews.length === 0) {
+      console.warn("⚠️ No previous view available.");
+      backArrow.setAttribute("display", "none");
+      return;
+    }
+
+    console.log("⬅ Back clicked - Sparar nuvarande vy i futureViews");
+
+    // 🔥 Spara nuvarande vy i `futureViews` innan vi byter
+    State.appState.futureViews.push([...State.appState.currentView]);
+
+    let prevView;
+
+    // 🔎 Om användaren har gjort en Titles-sökning, använd `lastSearch`
+    if (State.appState.lastSearch.length > 0) {
+      console.log("📌 Använd lastSearch för att gå tillbaka");
+      State.appState.futureViews = State.appState.lastSearch;
+      prevView = State.appState.previousViews.pop();
+      State.appState.lastSearch = [];
+    }
+    // 🔎 Om det var en vanlig bigCard, hämta senaste vyn från previousViews
+    else {
+      console.log("🔄 Går tillbaka till previousViews");
+      prevView = State.appState.previousViews.pop();
+    }
+
+    if (prevView) {
+      State.appState.currentView = prevView;
+      console.log("⬅ Back - Uppdaterad vy:", State.appState.currentView);
+      Functions.renderMiniCard(State.appState.currentView);
+    } else {
+      console.warn("⚠️ No previous view available.");
+    }
+
+    console.log("📊 All states:", State.appState);
+  });
+}
+
+if (forwardArrowWrapper) {
+  forwardArrowWrapper.addEventListener("click", () => {
+    if (State.appState.futureViews.length === 0) {
+      console.warn("⚠️ No forward view available.");
+      return;
+    }
+
+    console.log("➡ Forward clicked - Navigerar framåt");
+
+    // 🔥 Spara nuvarande vy i `previousViews` innan vi går framåt
+    State.appState.previousViews.push([...State.appState.currentView]);
+
+    const futView = State.appState.futureViews.pop();
+
+    if (futView) {
+      console.log("➡ Forward - Ny vy hämtad:", futView);
+      State.appState.currentView = futView;
+      Functions.renderMiniCard(State.appState.currentView);
     } else {
       console.warn("⚠️ No forward view available, staying on current view.");
     }
+
+    console.log("📊 All states:", State.appState);
   });
-} */
+}
 
 //innan currentview ändras ska den läggas till i

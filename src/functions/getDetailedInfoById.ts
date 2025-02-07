@@ -1,13 +1,32 @@
 import { baseUrl } from "../main";
 import { AllTypes } from "../types/types";
+import * as Utils from "../utils/utilsIndex/utilsIndex";
 
 export const getDetailedInfoById = async (
   movieId: string
-): Promise<AllTypes.Movie> => {
-  const detailedInfoUrl = baseUrl + "i=" + movieId;
-  detailedInfoUrl;
-  const response = await fetch(detailedInfoUrl);
-  const data = (await response.json()) as AllTypes.Movie;
-
-  return data;
+): Promise<AllTypes.Movie | null> => {
+  try {
+    const detailedInfoUrl = baseUrl + "i=" + encodeURIComponent(movieId);
+    detailedInfoUrl;
+    const response = await fetch(detailedInfoUrl);
+    console.log(
+      `API responded with status ${response.status}: ${response.statusText}`
+    );
+    if (!response.ok) {
+      throw new Error(
+        `API responded with status ${response.status}: ${response.statusText}`
+      );
+    }
+    const data = (await response.json()) as AllTypes.Movie;
+    Utils.removeErrorMessage();
+    if (!data) {
+      console.warn("⚠️ No movies found for this ID.");
+      return null;
+    }
+    return data;
+  } catch (error) {
+    console.error("❌ API request failed:", error);
+    Utils.displayErrorMessage(`❌ API request failed: ${error}`);
+    return null;
+  }
 };

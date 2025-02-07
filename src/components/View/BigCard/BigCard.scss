@@ -3,6 +3,7 @@
 
 .bigCard {
   @include mixin.flexCenter(column, normal);
-  width: 621px;
+  width: globalVar.$cardWidth;
+  min-height: 450px;
   position: relative; /*Gör att barn kan använda positioneringssystem */
 }

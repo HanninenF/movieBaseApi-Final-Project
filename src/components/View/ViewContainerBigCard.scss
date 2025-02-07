@@ -1,18 +1,12 @@
 @use "../../styleHelpers/mixin.scss" as mixin;
 @use "../../styleHelpers/variables.scss" as globalVar;
-.viewContainer {
+.viewContainerBigCard {
   border-radius: globalVar.$borderRadius;
   align-self: center;
   background-color: globalVar.$cardBackgroundColor;
   /* margin: 2rem 0 0 9rem; */
+  width: 530px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   /* gap: 1rem; */
-  .errorMessage {
-    @include mixin.flexCenter(column, center);
-    width: globalVar.$cardWidth;
-    min-height: 450px;
-    position: relative;
-    @include mixin.textStyle(black, none, 2.5rem, normal, normal, 10px);
-  }
 }

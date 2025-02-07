@@ -6,7 +6,7 @@
   @include mixin.textStyle(
     inherit,
     globalVar.$stroke,
-    1.5rem,
+    clamp(0.75rem, 3vw, 1.5rem),
     normal,
     normal,
     0

@@ -5,3 +5,5 @@ export * from "../getSanitizedString";
 export * from "../createCustomElement";
 export * from "../extractTitleParts";
 export * from "../createTitleElementWithColonSplit";
+export * from "../removeErrorMessage";
+export * from "../displayErrorMessage";

@@ -2,7 +2,7 @@
 @use "../../../styleHelpers/variables.scss" as globalVar;
 
 .titleDiv {
-  height: 200px; /* Ange höjd för hero-sektionen */
+  height: globalVar.$heroItemsHeight; /* Ange höjd för hero-sektionen */
   width: globalVar.$heroItemsWidth;
   @include mixin.flexCenter(row, space-between, normal);
   border-radius: globalVar.$borderRadius;
