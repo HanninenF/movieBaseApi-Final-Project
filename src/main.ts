@@ -113,6 +113,7 @@ if (searchBar && AllDomEl.dropdown && AllDomEl.searchInput) {
     ) as string;
 
     if (dropdownValue === "All") {
+      State.appState.hasErrorMessage = false;
       const movieInfo = await Functions.getMovieInfoByName(searchInputValue);
 
       if (movieInfo && movieInfo.Search) {
@@ -127,8 +128,9 @@ if (searchBar && AllDomEl.dropdown && AllDomEl.searchInput) {
     }
     if (dropdownValue === "Titles") {
       //TODO:
+      State.appState.hasErrorMessage = false;
       const movieInfo = await Functions.getMovieInfoByTitle(searchInputValue);
-      console.log(movieInfo);
+      console.log("movieInfo in titles", movieInfo);
 
       if (movieInfo) {
         State.setAllMoviesFromTitles(movieInfo);
@@ -141,6 +143,7 @@ if (searchBar && AllDomEl.dropdown && AllDomEl.searchInput) {
     }
     if (dropdownValue === "Movies") {
       //TODO_
+      State.appState.hasErrorMessage = false;
       const movieInfo =
         await Functions.getMovieInfoByNameAndTypeMovie(searchInputValue);
 
@@ -156,6 +159,7 @@ if (searchBar && AllDomEl.dropdown && AllDomEl.searchInput) {
     }
     if (dropdownValue === "Series") {
       //TODO:
+      State.appState.hasErrorMessage = false;
       const seriesInfo = await Functions.getSeriesInfoByName(searchInputValue);
 
       if (seriesInfo && seriesInfo.Search) {
@@ -177,6 +181,7 @@ if (searchBar && AllDomEl.dropdown && AllDomEl.searchInput) {
   ////////////EventListener/////////
   //////////////////////////////////
   AllDomEl.viewContainer.addEventListener("click", async (e) => {
+    State.appState.hasErrorMessage = false;
     const target = e.target as HTMLElement;
     const miniCard = target.closest("button.miniCard") as HTMLButtonElement;
 
@@ -225,19 +230,23 @@ if (searchBar && AllDomEl.dropdown && AllDomEl.searchInput) {
 
           // ✅ Uppdatera `currentView` med den detaljerade filmen
           State.appState.currentView = [detailedInfo];
-
-          // ✅ Rendera den uppdaterade `currentView`
-          AllDomEl.viewContainer.classList.add("viewContainerBigCard");
-          Functions.renderBigCard(
-            State.appState.currentView[0] as AllTypes.Movie
-          );
-
-          console.log("🔹 Clicked movie, updated State:", State.appState);
         }
       }
 
-      const previousMovie = State.appState.previousViews[0]?.[0];
-      console.log("previousMovie:", previousMovie);
+      if (!State.appState.hasErrorMessage) {
+        console.log("hasErrorMessage: ", State.appState.hasErrorMessage);
+        // ✅ Rendera den uppdaterade `currentView`
+        AllDomEl.viewContainer.classList.add("viewContainerBigCard");
+        console.log("viewContainerBigCard", AllDomEl.viewContainer);
+        Functions.renderBigCard(
+          State.appState.currentView[0] as AllTypes.Movie
+        );
+
+        console.log("🔹 Clicked movie, updated State:", State.appState);
+        const previousMovie = State.appState.previousViews[0]?.[0];
+        console.log("previousMovie:", previousMovie);
+      }
+      console.log("hasErrorMessage: ", State.appState.hasErrorMessage);
     }
   });
 }

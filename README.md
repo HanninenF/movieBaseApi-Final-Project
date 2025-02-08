@@ -7,7 +7,7 @@ MovieBaseAPI is a web application where users can search for **movies, series, a
 ### 1. Clone the repository
 
 ```sh
-git clone https://github.com/HanninenF/movieBaseApi-Final-Project.git
+git clone https://github.com/HanninenF/movieBaseApi-Final-Project.git/
 cd movieBaseApi-Final-Project
 ```
 

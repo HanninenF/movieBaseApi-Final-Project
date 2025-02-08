@@ -84,6 +84,7 @@ export namespace AllTypes {
     imdbGradeClass: string[];
   };
 
+  export type ErrorMessage = boolean;
   /* export type CurrentView = (AllTypes.Search | AllTypes.Movie)[]; */
 
   export type Category = (typeof dropDownOptionsData)[number];

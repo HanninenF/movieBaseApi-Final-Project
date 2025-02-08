@@ -6,4 +6,5 @@ export const appState = {
   previousViews: [] as AllTypes.Search[][],
   futureViews: [] as AllTypes.Search[][],
   lastSearch: [] as AllTypes.Search[][],
+  hasErrorMessage: false as AllTypes.ErrorMessage,
 };
