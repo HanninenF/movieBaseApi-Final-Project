@@ -28,3 +28,4 @@ dist-ssr
 
 #old file folders
 old_files_styles/
+tsconfig-not-in-use.json
